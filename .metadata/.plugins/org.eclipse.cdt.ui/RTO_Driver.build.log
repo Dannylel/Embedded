@@ -1,0 +1,62 @@
+11:49:51 **** Incremental Build of configuration Debug for project RTO_Driver ****
+make all 
+Building file: ../LED_prg.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"LED_prg.d" -MT"LED_prg.o" -c -o "LED_prg.o" "../LED_prg.c"
+Finished building: ../LED_prg.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: libRTO_Driver.a
+Invoking: AVR Archiver
+avr-ar -r  "libRTO_Driver.a"  ./Dio_prg.o ./LED_prg.o ./main.o  
+c:\Users\Dan\Desktop\Tools\SDK\IMT_SDK_Win_64\WinAVR\bin\avr-ar.exe: creating libRTO_Driver.a
+Finished building target: libRTO_Driver.a
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S libRTO_Driver.a  >"libRTO_Driver.lss"
+Finished building: libRTO_Driver.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 libRTO_Driver.a
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:       0 bytes (0.0% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+11:49:52 Build Finished (took 506ms)
+

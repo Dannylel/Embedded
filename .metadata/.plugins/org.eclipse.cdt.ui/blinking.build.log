@@ -1,0 +1,40 @@
+18:35:21 **** Build of configuration Debug for project blinking ****
+make all 
+Building file: ../blinking1.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"blinking1.d" -MT"blinking1.o" -c -o "blinking1.o" "../blinking1.c"
+In file included from ../blinking1.c:13:
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../blinking1.c
+ 
+Building target: blinking.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,blinking.map -mmcu=atmega32 -o "blinking.elf"  ./blinking.o ./blinking1.o   
+Finished building target: blinking.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S blinking.elf  >"blinking.lss"
+Finished building: blinking.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex blinking.elf  "blinking.hex"
+Finished building: blinking.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 blinking.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    3504 bytes (10.7% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+18:35:22 Build Finished (took 512ms)
+

@@ -1,0 +1,78 @@
+/*
+ * main.c
+ *
+ *  Created on: Feb 21, 2020
+ *      Author: Dan
+ */
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#include"DIO_int.h"
+#include"Keypad_int.h"
+#include"Lcd_int.h"
+#include"Login_int.h"
+#undef F_CPU
+#define F_CPU 8000000
+#include<util/delay.h>
+
+int main(void){
+
+	u8 key;
+
+	Lcd_vidInit();
+	while(1){
+		key=Keypad_u8GetKey();
+		while(key!=0xFF){
+			if((key!='#')&&(key!='=')){
+				if((key!='+')&&(key!='-')&&(key!='*')&&(key!='/')){
+					switch(key){
+					case 0:
+						Lcd_vidSendCommand(0x80);
+						Lcd_vidWriteChar('A');
+					}
+
+
+				}
+				else if(key=='+'){
+					result=op1+op2;
+					Lcd_vidSendCommand(0x81);
+					Lcd_vidWriteChar('+');
+				}
+				else if(key=='-'){
+					result=op1-op2;
+					Lcd_vidSendCommand(0x81);
+					Lcd_vidWriteChar('-');
+				}
+				else if(key=='*'){
+					result=op1*op2;
+					Lcd_vidSendCommand(0x81);
+					Lcd_vidWriteChar('*');
+				}
+				else if(key=='/'){
+					result=op1/op2;
+					Lcd_vidSendCommand(0x81);
+					Lcd_vidWriteChar('/');
+				}
+			}
+			key1=Keypad_u8GetKey();
+			if((key1!='#')&&(key1!='=')){
+				if((key1!='+')&&(key!='-')&&(key1!='*')&&(key1!='/')){
+					op2=key1;
+					Lcd_vidSendCommand(0x82);
+					Lcd_vidWriteChar(op2+'0');
+				}
+			}
+			key2=Keypad_u8GetKey();
+			if(key2=='='){
+				Lcd_vidSendCommand(0x83);
+				Lcd_vidWriteChar(key2);
+
+				Lcd_vidSendCommand(0x84);
+				Lcd_vidWriteChar(result+'0');
+			}
+			else if(key2=='#'){
+				Lcd_vidSendCommand(0x01);
+			}
+		}
+	}
+	return 0;
+}

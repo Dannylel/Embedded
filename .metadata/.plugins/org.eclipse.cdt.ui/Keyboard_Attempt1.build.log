@@ -1,0 +1,46 @@
+17:12:03 **** Incremental Build of configuration Debug for project Keyboard_Attempt1 ****
+make all 
+Building file: ../Keyboard_prg.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"Keyboard_prg.d" -MT"Keyboard_prg.o" -c -o "Keyboard_prg.o" "../Keyboard_prg.c"
+../Keyboard_prg.c: In function 'Keyboard_vidReceivedKey':
+../Keyboard_prg.c:29: warning: unused variable 'j'
+../Keyboard_prg.c:29: warning: unused variable 'i'
+../Keyboard_prg.c:29: warning: unused variable 'CursorPosition'
+Finished building: ../Keyboard_prg.c
+ 
+Building target: Keyboard_Attempt1.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Keyboard_Attempt1.map -mmcu=atmega32 -o "Keyboard_Attempt1.elf"  ./Dio_prg.o ./Keyboard_prg.o ./Lcd_prg.o ./Uart_prg.o ./main.o   
+Finished building target: Keyboard_Attempt1.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Keyboard_Attempt1.elf  >"Keyboard_Attempt1.lss"
+Finished building: Keyboard_Attempt1.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Keyboard_Attempt1.elf  "Keyboard_Attempt1.hex"
+Finished building: Keyboard_Attempt1.hex
+ 
+Create eeprom image (ihex format)
+avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex Keyboard_Attempt1.elf  "Keyboard_Attempt1.eep"
+Finished building: Keyboard_Attempt1.eep
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Keyboard_Attempt1.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    7352 bytes (22.4% Full)
+(.text + .data + .bootloader)
+
+Data:         23 bytes (1.1% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+17:12:05 Build Finished (took 2s.200ms)
+

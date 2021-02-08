@@ -1,0 +1,46 @@
+/*
+ * ledwar.c
+ *
+ *  Created on: Jan 24, 2020
+ *      Author: Dan
+ */
+#include<stdio.h>
+#include"Std_types.h"
+#include"Bit_math.h"
+#include"Dio_int.h"
+#include<util/delay.h>
+int main(void){
+
+	Dio_vidSetPinDir(0,1);
+	Dio_vidSetPinDir(1,1);
+	Dio_vidSetPinDir(2,1);
+	Dio_vidSetPinDir(3,1);
+	Dio_vidSetPinDir(4,1);
+	Dio_vidSetPinDir(5,1);
+	Dio_vidSetPinDir(6,1);
+	Dio_vidSetPinDir(7,1);
+	while(1){
+		Dio_vidSetPinVal(0,1);
+		Dio_vidSetPinVal(1,1);
+		Dio_vidSetPinVal(2,1);
+		Dio_vidSetPinVal(3,1);
+		Dio_vidSetPinVal(4,1);
+		Dio_vidSetPinVal(5,1);
+		Dio_vidSetPinVal(6,1);
+		Dio_vidSetPinVal(7,1);
+		_delay_ms(350);
+
+		Dio_vidSetPinVal(0,0);
+		Dio_vidSetPinVal(1,0);
+		Dio_vidSetPinVal(2,0);
+		Dio_vidSetPinVal(3,0);
+		Dio_vidSetPinVal(4,0);
+		Dio_vidSetPinVal(5,0);
+		Dio_vidSetPinVal(6,0);
+		Dio_vidSetPinVal(7,0);
+
+
+
+	}
+	return 0;
+}

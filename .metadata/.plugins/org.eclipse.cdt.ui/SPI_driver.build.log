@@ -1,0 +1,21 @@
+11:00:00 **** Incremental Build of configuration Debug for project SPI_driver ****
+make all 
+Building file: ../Dio_prg.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"Dio_prg.d" -MT"Dio_prg.o" -c -o "Dio_prg.o" "../Dio_prg.c"
+../Dio_prg.c: In function 'Dio_vidSetPinVal':
+../Dio_prg.c:61: error: invalid operands to binary | (have 'Reg_type' and 'int')
+../Dio_prg.c:64: error: invalid operands to binary & (have 'Reg_type' and 'int')
+../Dio_prg.c:69: error: invalid operands to binary | (have 'Reg_type' and 'int')
+../Dio_prg.c:72: error: invalid operands to binary & (have 'Reg_type' and 'int')
+../Dio_prg.c:77: error: invalid operands to binary | (have 'Reg_type' and 'int')
+../Dio_prg.c:80: error: invalid operands to binary & (have 'Reg_type' and 'int')
+../Dio_prg.c:85: error: invalid operands to binary | (have 'Reg_type' and 'int')
+../Dio_prg.c:88: error: invalid operands to binary & (have 'Reg_type' and 'int')
+../Dio_prg.c: In function 'Dio_u8GetPinVal':
+../Dio_prg.c:104: warning: implicit declaration of function 'Get_BIT'
+../Dio_prg.c:116: warning: control reaches end of non-void function
+make: *** [Dio_prg.o] Error 1
+
+11:00:00 Build Finished (took 202ms)
+

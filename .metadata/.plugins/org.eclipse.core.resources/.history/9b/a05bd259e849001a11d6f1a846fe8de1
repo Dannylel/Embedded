@@ -1,0 +1,41 @@
+/*
+ * Bouncing_Names_prg.c
+ *
+ *  Created on: Feb 4, 2020
+ *      Author: Dan
+ */
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#include<string.h>
+#define F_CPU 8000000
+#include<util/delay.h>
+
+#include"Lcd_int_bouncing.h"
+#include<avr/io.h>
+
+void Bouncing_Names_vidWriteName(char *letter, u8 size){
+
+	u8 i,j;
+	u8 first=0x80;
+	u8 second=0xc1;
+	size=strlen(letter);
+	for(j=0; j<16; j++){
+
+		for(i=size-1; i>=0; i--){
+			if((i%2)==0){
+				Lcd_vidSendCommand(first);
+				first+=2;
+			}
+			else {
+				Lcd_vidSendCommand(second);
+				second+=2;
+			}
+
+			Lcd_vidWriteChar(letter[i]);
+			_delay_ms(1000);
+		}
+		Lcd_vidSendCommand(0x01);
+
+	}
+}
+

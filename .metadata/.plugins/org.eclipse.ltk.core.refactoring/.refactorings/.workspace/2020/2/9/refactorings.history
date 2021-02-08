@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;pwm&apos; to &apos;Timer0_delay&apos;" description="Rename resource &apos;pwm&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/pwm" name="Timer0_delay" stamp="1582904169564" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Timer0_delay2&apos; to &apos;Timer0_FastPWM&apos;" description="Rename resource &apos;Timer0_delay2&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Timer0_delay2" name="Timer0_FastPWM" stamp="1582984163296" updateReferences="true"/>
+</session>

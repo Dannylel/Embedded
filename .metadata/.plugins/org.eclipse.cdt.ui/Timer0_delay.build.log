@@ -1,0 +1,48 @@
+17:05:50 **** Incremental Build of configuration Debug for project Timer0_delay ****
+make all 
+Building file: ../Dio_prg.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"Dio_prg.d" -MT"Dio_prg.o" -c -o "Dio_prg.o" "../Dio_prg.c"
+Finished building: ../Dio_prg.c
+ 
+Building file: ../LED_prg.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"LED_prg.d" -MT"LED_prg.o" -c -o "LED_prg.o" "../LED_prg.c"
+Finished building: ../LED_prg.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: Timer0_delay.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Timer0_delay.map -mmcu=atmega32 -o "Timer0_delay.elf"  ./Dio_prg.o ./LED_prg.o ./main.o   
+Finished building target: Timer0_delay.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Timer0_delay.elf  >"Timer0_delay.lss"
+Finished building: Timer0_delay.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Timer0_delay.elf  "Timer0_delay.hex"
+Finished building: Timer0_delay.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Timer0_delay.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    2100 bytes (6.4% Full)
+(.text + .data + .bootloader)
+
+Data:          7 bytes (0.3% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+17:05:52 Build Finished (took 2s.118ms)
+

@@ -1,0 +1,40 @@
+12:22:43 **** Incremental Build of configuration Debug for project Volume_Bar ****
+make all 
+Building file: ../Volume_prg.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"Volume_prg.d" -MT"Volume_prg.o" -c -o "Volume_prg.o" "../Volume_prg.c"
+In file included from ../Volume_prg.c:15:
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../Volume_prg.c
+ 
+Building target: Volume_Bar.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Volume_Bar.map -mmcu=atmega32 -o "Volume_Bar.elf"  ./ADC_prg.o ./Dio_prg.o ./Lcd_prg.o ./Volume_prg.o ./main.o   
+Finished building target: Volume_Bar.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Volume_Bar.elf  >"Volume_Bar.lss"
+Finished building: Volume_Bar.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Volume_Bar.elf  "Volume_Bar.hex"
+Finished building: Volume_Bar.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Volume_Bar.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    8808 bytes (26.9% Full)
+(.text + .data + .bootloader)
+
+Data:        328 bytes (16.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+12:22:43 Build Finished (took 514ms)
+

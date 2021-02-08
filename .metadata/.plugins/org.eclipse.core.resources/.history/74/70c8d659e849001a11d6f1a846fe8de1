@@ -1,0 +1,63 @@
+/*
+ * main.c
+ *
+ *  Created on: Feb 4, 2020
+ *      Author: Dan
+ */
+
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#include<string.h>
+#include"Lcd_int_bouncing.h"
+#include"Bouncing_Names_int.h"
+#include<avr/io.h>
+#define F_CPU 8000000
+#include<util/delay.h>
+
+int main(void){
+	char *a="dan";
+	u8 first=0x80;
+	u8 second=0xC1;
+
+	Lcd_vidInit();
+	//Bouncing_Names_vidWriteName(a,3);
+
+
+	/*Lcd_vidSendCommand(00);
+	Lcd_vidWriteChar('s');
+	Lcd_vidSendCommand(193);
+	Lcd_vidWriteChar('a');
+	 */
+	//Lcd_vidSendCommand(0x80);
+	//Lcd_vidWriteChar('a');
+	while(1){
+		//Bouncing_Names_vidWriteName(a,3);
+		Lcd_vidSendCommand(first);
+		Lcd_vidWriteChar('N');
+		_delay_ms(1000);
+
+		Lcd_vidSendCommand(second);
+		Lcd_vidWriteChar('N');
+		Lcd_vidSendCommand(first);
+		Lcd_vidWriteChar(' ');
+		Lcd_vidSendCommand(first);
+		Lcd_vidWriteChar('A');
+		_delay_ms(1000);
+
+		Lcd_vidSendCommand(first+2);
+		Lcd_vidWriteChar('N');
+		Lcd_vidSendCommand(second);
+		Lcd_vidWriteChar(' ');
+		Lcd_vidSendCommand(second);
+		Lcd_vidWriteChar('A');
+		Lcd_vidSendCommand(first);
+		Lcd_vidWriteChar(' ');
+		Lcd_vidSendCommand(first);
+		Lcd_vidWriteChar('D');
+		_delay_ms(1000);
+		Lcd_vidSendCommand(0x01);
+
+	}
+	return 0;
+}
+

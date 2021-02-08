@@ -1,0 +1,37 @@
+12:34:07 **** Incremental Build of configuration Debug for project newproject1 ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+../main.c: In function 'main':
+../main.c:19: error: request for member 'Byte' in something not a structure or union
+../main.c:20: error: request for member 'Bits' in something not a structure or union
+../main.c:23: error: invalid type argument of 'unary *' (have 'int')
+../main.c:25: warning: unused variable 'y'
+../main.c: At top level:
+../main.c:46: error: conflicting types for 'Reg_type'
+../main.c:16: error: previous declaration of 'Reg_type' was here
+../main.c:57:1: warning: "DDRA" redefined
+In file included from c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/avr/io.h:206,
+                 from ../main.c:1:
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/avr/iom32.h:99:1: warning: this is the location of the previous definition
+../main.c:60:1: warning: "DDRA" redefined
+../main.c:57:1: warning: this is the location of the previous definition
+../main.c:61:1: warning: "DDRB" redefined
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/avr/iom32.h:94:1: warning: this is the location of the previous definition
+../main.c:62:1: warning: "DDRC" redefined
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/avr/iom32.h:89:1: warning: this is the location of the previous definition
+../main.c:63:1: warning: "DDRD" redefined
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/avr/iom32.h:84:1: warning: this is the location of the previous definition
+../main.c:65:1: warning: "PORTA" redefined
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/avr/iom32.h:100:1: warning: this is the location of the previous definition
+../main.c:66:1: warning: "PORTB" redefined
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/avr/iom32.h:95:1: warning: this is the location of the previous definition
+../main.c:67:1: warning: "PORTC" redefined
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/avr/iom32.h:90:1: warning: this is the location of the previous definition
+../main.c:68:1: warning: "PORTD" redefined
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/avr/iom32.h:85:1: warning: this is the location of the previous definition
+make: *** [main.o] Error 1
+
+12:34:08 Build Finished (took 642ms)
+

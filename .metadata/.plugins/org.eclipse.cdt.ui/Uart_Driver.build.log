@@ -1,0 +1,33 @@
+05:46:11 **** Incremental Build of configuration Debug for project Uart_Driver ****
+make all 
+Building target: Uart_Driver.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Uart_Driver.map -mmcu=atmega32 -o "Uart_Driver.elf"  ./Dio_prg.o ./LED_prg.o ./Uart_prg.o ./main.o   
+Finished building target: Uart_Driver.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Uart_Driver.elf  >"Uart_Driver.lss"
+Finished building: Uart_Driver.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Uart_Driver.elf  "Uart_Driver.hex"
+Finished building: Uart_Driver.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Uart_Driver.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    1992 bytes (6.1% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+05:46:11 Build Finished (took 398ms)
+

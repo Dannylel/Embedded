@@ -1,0 +1,30 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 19, 2020
+ *      Author: Dan
+ */
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#include"avr/io.h"
+#include"Uart_int.h"
+
+int main(void){
+//UDR
+
+	SET_BIT(UCSRA,4); //
+	SET_BIT(UCSRB,4); //RX enabled
+	SET_BIT(UCSRB,3); //TX enabled
+	CLR_BIT(UCSRB,2); //Character size: 8
+	CLR_BIT(UCSRC,6); //Asynchronous
+	CLR_BIT(UCSRC,5); //Parity Disabled
+	CLR_BIT(UCSRC,4); //Parity Disabled
+	CLR_BIT(UCSRC,3); //1 stop bit
+	CLR_BIT(UCSRC,2);//Character size: 8
+	SET_BIT(UCSRC,1);//Character size: 8
+	while(1){
+
+	}
+	return 0;
+}
+

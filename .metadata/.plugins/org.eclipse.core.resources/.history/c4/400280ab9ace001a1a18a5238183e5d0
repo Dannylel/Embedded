@@ -1,0 +1,26 @@
+/*
+ * main.c
+ *
+ *  Created on: Jun 28, 2020
+ *      Author: Dan
+ */
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#include<avr/io.h>
+#include"Dio_int.h"
+#include<util/delay.h>
+
+
+int main(void){
+
+	Dio_vidSetPinDir(DIO_u8PIN_23,DIO_u8OUTPUT);
+	while(1){
+
+		Dio_vidSetPinVal(DIO_u8PIN_23,DIO_u8HIGH);
+		_delay_ms(5000);
+		Dio_vidSetPinVal(DIO_u8PIN_23,DIO_u8LOW);
+		_delay_ms(5000);
+	}
+
+	return 0;
+}

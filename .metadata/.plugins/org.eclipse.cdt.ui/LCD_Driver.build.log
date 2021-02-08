@@ -1,0 +1,20 @@
+22:06:04 **** Incremental Build of configuration Debug for project LCD_Driver ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 LCD_Driver.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    4520 bytes (13.8% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+22:06:04 Build Finished (took 147ms)
+

@@ -1,0 +1,38 @@
+12:59:54 **** Incremental Build of configuration Debug for project RTO_Driver2 ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: RTO_Driver2.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,RTO_Driver2.map -mmcu=atmega32 -o "RTO_Driver2.elf"  ./Dio_prg.o ./LED_prg.o ./main.o   
+Finished building target: RTO_Driver2.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S RTO_Driver2.elf  >"RTO_Driver2.lss"
+Finished building: RTO_Driver2.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex RTO_Driver2.elf  "RTO_Driver2.hex"
+Finished building: RTO_Driver2.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 RTO_Driver2.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    2574 bytes (7.9% Full)
+(.text + .data + .bootloader)
+
+Data:         20 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+12:59:54 Build Finished (took 451ms)
+

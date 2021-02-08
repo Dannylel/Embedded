@@ -1,0 +1,7 @@
+17:58:02 **** Clean-only build of configuration Debug for project ledwar ****
+make clean 
+rm -rf  ledwar.hex  ./Dio_prg.o ./ledwar.o  sizedummy  ledwar.lss  ./Dio_prg.d ./ledwar.d  ledwar.elf
+ 
+
+17:58:03 Build Finished (took 204ms)
+

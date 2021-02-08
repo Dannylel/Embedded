@@ -1,0 +1,40 @@
+18:36:15 **** Incremental Build of configuration Debug for project Input_Capture ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+In file included from ../main.c:12:
+c:/users/dan/desktop/tools/sdk/imt_sdk_win_64/winavr/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building target: Input_Capture.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Input_Capture.map -mmcu=atmega32 -o "Input_Capture.elf"  ./Dio_prg.o ./Lcd_prg.o ./main.o   
+Finished building target: Input_Capture.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Input_Capture.elf  >"Input_Capture.lss"
+Finished building: Input_Capture.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Input_Capture.elf  "Input_Capture.hex"
+Finished building: Input_Capture.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Input_Capture.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    8018 bytes (24.5% Full)
+(.text + .data + .bootloader)
+
+Data:        288 bytes (14.1% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+18:36:16 Build Finished (took 510ms)
+

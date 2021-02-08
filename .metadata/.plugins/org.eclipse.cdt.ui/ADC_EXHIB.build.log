@@ -1,0 +1,41 @@
+18:33:45 **** Incremental Build of configuration Debug for project ADC_EXHIB ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+../main.c: In function 'main':
+../main.c:24: warning: implicit declaration of function 'Led_u8TurnON'
+../main.c:25: warning: implicit declaration of function 'Led_u8TurnOFF'
+Finished building: ../main.c
+ 
+Building target: ADC_EXHIB.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,ADC_EXHIB.map -mmcu=atmega32 -o "ADC_EXHIB.elf"  ./ADC_prg.o ./Dio_prg.o ./LED_prg.o ./main.o   
+Finished building target: ADC_EXHIB.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S ADC_EXHIB.elf  >"ADC_EXHIB.lss"
+Finished building: ADC_EXHIB.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex ADC_EXHIB.elf  "ADC_EXHIB.hex"
+Finished building: ADC_EXHIB.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 ADC_EXHIB.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    2182 bytes (6.7% Full)
+(.text + .data + .bootloader)
+
+Data:          0 bytes (0.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+18:33:47 Build Finished (took 1s.579ms)
+

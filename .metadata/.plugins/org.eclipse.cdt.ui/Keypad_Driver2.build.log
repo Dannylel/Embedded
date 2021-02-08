@@ -1,0 +1,33 @@
+01:58:16 **** Build of configuration Debug for project Keypad_Driver2 ****
+make all 
+Building target: Keypad_Driver2.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Keypad_Driver2.map -mmcu=atmega32 -o "Keypad_Driver2.elf"  ./Dio_prg.o ./Keypad_prg.o ./Lcd_prg.o ./main.o   
+Finished building target: Keypad_Driver2.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Keypad_Driver2.elf  >"Keypad_Driver2.lss"
+Finished building: Keypad_Driver2.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Keypad_Driver2.elf  "Keypad_Driver2.hex"
+Finished building: Keypad_Driver2.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Keypad_Driver2.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    6842 bytes (20.9% Full)
+(.text + .data + .bootloader)
+
+Data:         19 bytes (0.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+01:58:16 Build Finished (took 526ms)
+

@@ -1,0 +1,84 @@
+/*
+ * main.c
+ *
+ *  Created on: Feb 21, 2020
+ *      Author: Dan
+ */
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#include"DIO_int.h"
+#include"Keypad_int.h"
+#include"Lcd_int.h"
+#include"Login_int.h"
+#undef F_CPU
+#define F_CPU 8000000
+#include<util/delay.h>
+#include<avr/io.h>
+
+int main(void){
+
+	u8 key,x,i;
+	Dio_vidSetPinDir(DIO_u8PIN_0,DIO_u8INPUT);
+	Dio_vidSetPinVal(DIO_u8PIN_0,DIO_u8HIGH); //pullup resistor
+	Lcd_vidInit();
+	while(1){
+		x=PINA;
+		if(x==1){
+			for(i=0; i<3; i++){
+				key=Keypad_u8GetKey();
+				if((key!='=')&&(key!='#')){
+					if(key==1){
+						Lcd_vidWriteChar('a');
+					}
+					else if(key==2){
+						Lcd_vidWriteChar('b');
+					}
+					else if(key==3){
+						Lcd_vidWriteChar('c');
+					}
+					else if(key=='+'){
+						Lcd_vidWriteChar('d');
+					}
+					else if(key==4){
+						Lcd_vidWriteChar('e');
+					}
+					else if(key==5){
+						Lcd_vidWriteChar('f');
+					}
+					else if(key==6){
+						Lcd_vidWriteChar('g');
+					}
+					else if(key=='-'){
+						Lcd_vidWriteChar('h');
+					}
+					else if(key==7){
+						Lcd_vidWriteChar('i');
+					}
+					else if(key==8){
+						Lcd_vidWriteChar('j');
+					}
+					else if(key==9){
+						Lcd_vidWriteChar('k');
+					}
+					else if(key=='*'){
+						Lcd_vidWriteChar('l');
+					}
+					else if(key==0){
+						Lcd_vidWriteChar('m');
+					}
+					else if(key=='/'){
+						Lcd_vidWriteChar('n');
+					}
+
+				}
+			}
+		}
+
+		else if(x==0){
+
+		}
+
+
+	}
+	return 0;
+}

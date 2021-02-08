@@ -1,0 +1,33 @@
+08:06:19 **** Incremental Build of configuration Debug for project Prof_Lcd ****
+make all 
+Building target: Prof_Lcd.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Prof_Lcd.map -mmcu=atmega32 -o "Prof_Lcd.elf"  ./Dio_prg.o ./Lcd_prg.o ./main.o   
+Finished building target: Prof_Lcd.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S Prof_Lcd.elf  >"Prof_Lcd.lss"
+Finished building: Prof_Lcd.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Prof_Lcd.elf  "Prof_Lcd.hex"
+Finished building: Prof_Lcd.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Prof_Lcd.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    5836 bytes (17.8% Full)
+(.text + .data + .bootloader)
+
+Data:         20 bytes (1.0% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+08:06:19 Build Finished (took 512ms)
+

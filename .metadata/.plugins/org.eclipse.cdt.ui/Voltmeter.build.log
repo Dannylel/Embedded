@@ -1,0 +1,20 @@
+17:05:56 **** Incremental Build of configuration Debug for project Voltmeter ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Voltmeter.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    7944 bytes (24.2% Full)
+(.text + .data + .bootloader)
+
+Data:        264 bytes (12.9% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+17:05:56 Build Finished (took 490ms)
+

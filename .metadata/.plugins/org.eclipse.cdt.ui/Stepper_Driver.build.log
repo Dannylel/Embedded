@@ -1,0 +1,20 @@
+23:36:55 **** Incremental Build of configuration Debug for project Stepper_Driver ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Stepper_Driver.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:   14436 bytes (44.1% Full)
+(.text + .data + .bootloader)
+
+Data:          8 bytes (0.4% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+23:36:55 Build Finished (took 154ms)
+

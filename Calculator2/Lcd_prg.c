@@ -81,3 +81,16 @@ void Lcd_MoveCursor(u8 Pos){
 		Lcd_vidSendCommand(16);
 	}
 }
+
+
+void Lcd_vidPrintStr(char *word){
+	u8 ii;
+	while(word[ii]!='\0'){
+		Lcd_vidWriteChar(word[ii]);
+		ii++;
+	}
+
+
+
+}
+

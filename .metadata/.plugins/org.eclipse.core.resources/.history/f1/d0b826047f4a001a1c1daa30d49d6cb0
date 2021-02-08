@@ -1,0 +1,90 @@
+/*
+ * main.c
+ *
+ *  Created on: Feb 8, 2020
+ *      Author: Dan
+ */
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#undef F_CPU
+#define F_CPU 8000000
+#include<util/delay.h>
+#include"Dio_int.h"
+
+
+
+int main(void){
+	Dio_vidSetPinDir(DIO_u8_PIN0,DIO_u8_OUTPUT);
+	Dio_vidSetPinDir(DIO_u8_PIN1,DIO_u8_OUTPUT);
+	Dio_vidSetPinDir(DIO_u8_PIN2,DIO_u8_OUTPUT);
+	Dio_vidSetPinDir(DIO_u8_PIN3,DIO_u8_OUTPUT);
+	while(1){
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_HIGH);
+		_delay_us(850);
+
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_HIGH);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_LOW);
+		_delay_us(850);
+
+
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_HIGH);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_LOW);
+		_delay_us(850);
+
+
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_HIGH);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_LOW);
+		_delay_us(850);
+
+
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_LOW);
+		_dealy_us(1800);
+
+
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_LOW);
+		_dealy_us(1800);
+
+
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_HIGH);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_LOW);
+		_dealy_us(1800);
+
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_HIGH);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_LOW);
+		_dealy_us(1800);
+
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_HIGH);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_LOW);
+		_dealy_us(1800);
+
+		Dio_vidSetPinVal(DIO_u8_PIN0,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN1,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN2,DIO_u8_LOW);
+		Dio_vidSetPinVal(DIO_u8_PIN3,DIO_u8_HIGH);
+		_dealy_us(1800);
+
+	}
+	return 0;
+}
+
