@@ -39,7 +39,7 @@ void Led_vidInit(u8 LedID){
 		break;
 	}
 }
-void Led_vidTurnOn(u8 LedID){
+void Led_vidTurnON(u8 LedID){
 	switch(LedID){
 	case 1:
 		Dio_vidSetPinVal(LED_u8ID_1,DIO_u8HIGH);
@@ -68,7 +68,7 @@ void Led_vidTurnOn(u8 LedID){
 	}
 }
 
-void Led_vidTurnOff(u8 LedID){
+void Led_vidTurnOFF(u8 LedID){
 	switch(LedID){
 	case 1:
 		Dio_vidSetPinVal(LED_u8ID_1,DIO_u8LOW);

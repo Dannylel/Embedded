@@ -9,7 +9,7 @@
 #define LED_INT_H_
 
 void Led_vidInit(u8 LedID);
-void Led_vidTurnOn(u8 LedID);
+void Led_vidTurnOn(void);
 void Led_vidTurnOff(u8 led_id);
 void Led_vidTurnON(u8 led_id);
 #define Led_1 1
