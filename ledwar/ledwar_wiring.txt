@@ -1,0 +1,10 @@
+leds:
+led1-0a
+led2-1a
+led3-2a
+led4-3a
+led5-4a
+led6-5a
+led7-6a
+led8-7a
+ledGND-GND
