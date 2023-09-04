@@ -1,0 +1,1606 @@
+In archive libRTO_Driver.a:
+
+Dio_prg.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .stab         000004e0  00000000  00000000  00000034  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  4 .stabstr      000004c3  00000000  00000000  00000514  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .text.Dio_vidSetPinDir 000001d6  00000000  00000000  000009d7  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  6 .text.Dio_vidSetPinVal 000001d6  00000000  00000000  00000bad  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text.Dio_u8GetPinVal 00000110  00000000  00000000  00000d83  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+
+Disassembly of section .text.Dio_vidSetPinDir:
+
+00000000 <Dio_vidSetPinDir>:
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#include"Dio_Priv.h"
+#include"Dio_int.h"
+
+void Dio_vidSetPinDir(u8 Pin, u8 Dir){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <Dio_vidSetPinDir+0x6>
+   6:	00 d0       	rcall	.+0      	; 0x8 <Dio_vidSetPinDir+0x8>
+   8:	00 d0       	rcall	.+0      	; 0xa <Dio_vidSetPinDir+0xa>
+   a:	cd b7       	in	r28, 0x3d	; 61
+   c:	de b7       	in	r29, 0x3e	; 62
+   e:	8b 83       	std	Y+3, r24	; 0x03
+  10:	6c 83       	std	Y+4, r22	; 0x04
+	u8 PortId;
+	u8 PinLoc;
+	PortId=Pin/8;
+  12:	8b 81       	ldd	r24, Y+3	; 0x03
+  14:	86 95       	lsr	r24
+  16:	86 95       	lsr	r24
+  18:	86 95       	lsr	r24
+  1a:	8a 83       	std	Y+2, r24	; 0x02
+	PinLoc=Pin%8;
+  1c:	8b 81       	ldd	r24, Y+3	; 0x03
+  1e:	87 70       	andi	r24, 0x07	; 7
+  20:	89 83       	std	Y+1, r24	; 0x01
+	switch(PortId){
+  22:	8a 81       	ldd	r24, Y+2	; 0x02
+  24:	28 2f       	mov	r18, r24
+  26:	30 e0       	ldi	r19, 0x00	; 0
+  28:	3e 83       	std	Y+6, r19	; 0x06
+  2a:	2d 83       	std	Y+5, r18	; 0x05
+  2c:	8d 81       	ldd	r24, Y+5	; 0x05
+  2e:	9e 81       	ldd	r25, Y+6	; 0x06
+  30:	81 30       	cpi	r24, 0x01	; 1
+  32:	91 05       	cpc	r25, r1
+  34:	01 f4       	brne	.+0      	; 0x36 <Dio_vidSetPinDir+0x36>
+  36:	00 c0       	rjmp	.+0      	; 0x38 <Dio_vidSetPinDir+0x38>
+  38:	2d 81       	ldd	r18, Y+5	; 0x05
+  3a:	3e 81       	ldd	r19, Y+6	; 0x06
+  3c:	22 30       	cpi	r18, 0x02	; 2
+  3e:	31 05       	cpc	r19, r1
+  40:	04 f4       	brge	.+0      	; 0x42 <Dio_vidSetPinDir+0x42>
+  42:	8d 81       	ldd	r24, Y+5	; 0x05
+  44:	9e 81       	ldd	r25, Y+6	; 0x06
+  46:	00 97       	sbiw	r24, 0x00	; 0
+  48:	01 f0       	breq	.+0      	; 0x4a <Dio_vidSetPinDir+0x4a>
+  4a:	00 c0       	rjmp	.+0      	; 0x4c <Dio_vidSetPinDir+0x4c>
+  4c:	2d 81       	ldd	r18, Y+5	; 0x05
+  4e:	3e 81       	ldd	r19, Y+6	; 0x06
+  50:	22 30       	cpi	r18, 0x02	; 2
+  52:	31 05       	cpc	r19, r1
+  54:	01 f4       	brne	.+0      	; 0x56 <Dio_vidSetPinDir+0x56>
+  56:	00 c0       	rjmp	.+0      	; 0x58 <Dio_vidSetPinDir+0x58>
+  58:	8d 81       	ldd	r24, Y+5	; 0x05
+  5a:	9e 81       	ldd	r25, Y+6	; 0x06
+  5c:	83 30       	cpi	r24, 0x03	; 3
+  5e:	91 05       	cpc	r25, r1
+  60:	01 f4       	brne	.+0      	; 0x62 <Dio_vidSetPinDir+0x62>
+  62:	00 c0       	rjmp	.+0      	; 0x64 <Dio_vidSetPinDir+0x64>
+  64:	00 c0       	rjmp	.+0      	; 0x66 <Dio_vidSetPinDir+0x66>
+	case 0:	//DDRA
+		if(Dir==1){
+  66:	8c 81       	ldd	r24, Y+4	; 0x04
+  68:	81 30       	cpi	r24, 0x01	; 1
+  6a:	01 f4       	brne	.+0      	; 0x6c <Dio_vidSetPinDir+0x6c>
+			SET_BIT(DDRA.Byte,PinLoc);
+  6c:	aa e3       	ldi	r26, 0x3A	; 58
+  6e:	b0 e0       	ldi	r27, 0x00	; 0
+  70:	ea e3       	ldi	r30, 0x3A	; 58
+  72:	f0 e0       	ldi	r31, 0x00	; 0
+  74:	80 81       	ld	r24, Z
+  76:	48 2f       	mov	r20, r24
+  78:	89 81       	ldd	r24, Y+1	; 0x01
+  7a:	28 2f       	mov	r18, r24
+  7c:	30 e0       	ldi	r19, 0x00	; 0
+  7e:	81 e0       	ldi	r24, 0x01	; 1
+  80:	90 e0       	ldi	r25, 0x00	; 0
+  82:	02 2e       	mov	r0, r18
+  84:	00 c0       	rjmp	.+0      	; 0x86 <Dio_vidSetPinDir+0x86>
+  86:	88 0f       	add	r24, r24
+  88:	99 1f       	adc	r25, r25
+  8a:	0a 94       	dec	r0
+  8c:	02 f4       	brpl	.+0      	; 0x8e <Dio_vidSetPinDir+0x8e>
+  8e:	84 2b       	or	r24, r20
+  90:	8c 93       	st	X, r24
+  92:	00 c0       	rjmp	.+0      	; 0x94 <Dio_vidSetPinDir+0x94>
+		}
+		else {
+			CLR_BIT(DDRA.Byte,PinLoc);
+  94:	aa e3       	ldi	r26, 0x3A	; 58
+  96:	b0 e0       	ldi	r27, 0x00	; 0
+  98:	ea e3       	ldi	r30, 0x3A	; 58
+  9a:	f0 e0       	ldi	r31, 0x00	; 0
+  9c:	80 81       	ld	r24, Z
+  9e:	48 2f       	mov	r20, r24
+  a0:	89 81       	ldd	r24, Y+1	; 0x01
+  a2:	28 2f       	mov	r18, r24
+  a4:	30 e0       	ldi	r19, 0x00	; 0
+  a6:	81 e0       	ldi	r24, 0x01	; 1
+  a8:	90 e0       	ldi	r25, 0x00	; 0
+  aa:	02 2e       	mov	r0, r18
+  ac:	00 c0       	rjmp	.+0      	; 0xae <Dio_vidSetPinDir+0xae>
+  ae:	88 0f       	add	r24, r24
+  b0:	99 1f       	adc	r25, r25
+  b2:	0a 94       	dec	r0
+  b4:	02 f4       	brpl	.+0      	; 0xb6 <Dio_vidSetPinDir+0xb6>
+  b6:	80 95       	com	r24
+  b8:	84 23       	and	r24, r20
+  ba:	8c 93       	st	X, r24
+  bc:	00 c0       	rjmp	.+0      	; 0xbe <Dio_vidSetPinDir+0xbe>
+		}
+		break;
+	case 1:	//DDRB
+		if(Dir==1){
+  be:	8c 81       	ldd	r24, Y+4	; 0x04
+  c0:	81 30       	cpi	r24, 0x01	; 1
+  c2:	01 f4       	brne	.+0      	; 0xc4 <Dio_vidSetPinDir+0xc4>
+			SET_BIT(DDRB.Byte,PinLoc);
+  c4:	a7 e3       	ldi	r26, 0x37	; 55
+  c6:	b0 e0       	ldi	r27, 0x00	; 0
+  c8:	e7 e3       	ldi	r30, 0x37	; 55
+  ca:	f0 e0       	ldi	r31, 0x00	; 0
+  cc:	80 81       	ld	r24, Z
+  ce:	48 2f       	mov	r20, r24
+  d0:	89 81       	ldd	r24, Y+1	; 0x01
+  d2:	28 2f       	mov	r18, r24
+  d4:	30 e0       	ldi	r19, 0x00	; 0
+  d6:	81 e0       	ldi	r24, 0x01	; 1
+  d8:	90 e0       	ldi	r25, 0x00	; 0
+  da:	02 2e       	mov	r0, r18
+  dc:	00 c0       	rjmp	.+0      	; 0xde <Dio_vidSetPinDir+0xde>
+  de:	88 0f       	add	r24, r24
+  e0:	99 1f       	adc	r25, r25
+  e2:	0a 94       	dec	r0
+  e4:	02 f4       	brpl	.+0      	; 0xe6 <Dio_vidSetPinDir+0xe6>
+  e6:	84 2b       	or	r24, r20
+  e8:	8c 93       	st	X, r24
+  ea:	00 c0       	rjmp	.+0      	; 0xec <Dio_vidSetPinDir+0xec>
+		}
+		else {
+			CLR_BIT(DDRB.Byte,PinLoc);
+  ec:	a7 e3       	ldi	r26, 0x37	; 55
+  ee:	b0 e0       	ldi	r27, 0x00	; 0
+  f0:	e7 e3       	ldi	r30, 0x37	; 55
+  f2:	f0 e0       	ldi	r31, 0x00	; 0
+  f4:	80 81       	ld	r24, Z
+  f6:	48 2f       	mov	r20, r24
+  f8:	89 81       	ldd	r24, Y+1	; 0x01
+  fa:	28 2f       	mov	r18, r24
+  fc:	30 e0       	ldi	r19, 0x00	; 0
+  fe:	81 e0       	ldi	r24, 0x01	; 1
+ 100:	90 e0       	ldi	r25, 0x00	; 0
+ 102:	02 2e       	mov	r0, r18
+ 104:	00 c0       	rjmp	.+0      	; 0x106 <Dio_vidSetPinDir+0x106>
+ 106:	88 0f       	add	r24, r24
+ 108:	99 1f       	adc	r25, r25
+ 10a:	0a 94       	dec	r0
+ 10c:	02 f4       	brpl	.+0      	; 0x10e <Dio_vidSetPinDir+0x10e>
+ 10e:	80 95       	com	r24
+ 110:	84 23       	and	r24, r20
+ 112:	8c 93       	st	X, r24
+ 114:	00 c0       	rjmp	.+0      	; 0x116 <Dio_vidSetPinDir+0x116>
+		}
+		break;
+	case 2:	//DDRC
+		if(Dir==1){
+ 116:	8c 81       	ldd	r24, Y+4	; 0x04
+ 118:	81 30       	cpi	r24, 0x01	; 1
+ 11a:	01 f4       	brne	.+0      	; 0x11c <Dio_vidSetPinDir+0x11c>
+			SET_BIT(DDRC.Byte,PinLoc);
+ 11c:	a4 e3       	ldi	r26, 0x34	; 52
+ 11e:	b0 e0       	ldi	r27, 0x00	; 0
+ 120:	e4 e3       	ldi	r30, 0x34	; 52
+ 122:	f0 e0       	ldi	r31, 0x00	; 0
+ 124:	80 81       	ld	r24, Z
+ 126:	48 2f       	mov	r20, r24
+ 128:	89 81       	ldd	r24, Y+1	; 0x01
+ 12a:	28 2f       	mov	r18, r24
+ 12c:	30 e0       	ldi	r19, 0x00	; 0
+ 12e:	81 e0       	ldi	r24, 0x01	; 1
+ 130:	90 e0       	ldi	r25, 0x00	; 0
+ 132:	02 2e       	mov	r0, r18
+ 134:	00 c0       	rjmp	.+0      	; 0x136 <Dio_vidSetPinDir+0x136>
+ 136:	88 0f       	add	r24, r24
+ 138:	99 1f       	adc	r25, r25
+ 13a:	0a 94       	dec	r0
+ 13c:	02 f4       	brpl	.+0      	; 0x13e <Dio_vidSetPinDir+0x13e>
+ 13e:	84 2b       	or	r24, r20
+ 140:	8c 93       	st	X, r24
+ 142:	00 c0       	rjmp	.+0      	; 0x144 <Dio_vidSetPinDir+0x144>
+		}
+		else {
+			CLR_BIT(DDRC.Byte,PinLoc);
+ 144:	a4 e3       	ldi	r26, 0x34	; 52
+ 146:	b0 e0       	ldi	r27, 0x00	; 0
+ 148:	e4 e3       	ldi	r30, 0x34	; 52
+ 14a:	f0 e0       	ldi	r31, 0x00	; 0
+ 14c:	80 81       	ld	r24, Z
+ 14e:	48 2f       	mov	r20, r24
+ 150:	89 81       	ldd	r24, Y+1	; 0x01
+ 152:	28 2f       	mov	r18, r24
+ 154:	30 e0       	ldi	r19, 0x00	; 0
+ 156:	81 e0       	ldi	r24, 0x01	; 1
+ 158:	90 e0       	ldi	r25, 0x00	; 0
+ 15a:	02 2e       	mov	r0, r18
+ 15c:	00 c0       	rjmp	.+0      	; 0x15e <Dio_vidSetPinDir+0x15e>
+ 15e:	88 0f       	add	r24, r24
+ 160:	99 1f       	adc	r25, r25
+ 162:	0a 94       	dec	r0
+ 164:	02 f4       	brpl	.+0      	; 0x166 <Dio_vidSetPinDir+0x166>
+ 166:	80 95       	com	r24
+ 168:	84 23       	and	r24, r20
+ 16a:	8c 93       	st	X, r24
+ 16c:	00 c0       	rjmp	.+0      	; 0x16e <Dio_vidSetPinDir+0x16e>
+		}
+		break;
+	case 3:	//DDRD
+		if(Dir==1){
+ 16e:	8c 81       	ldd	r24, Y+4	; 0x04
+ 170:	81 30       	cpi	r24, 0x01	; 1
+ 172:	01 f4       	brne	.+0      	; 0x174 <Dio_vidSetPinDir+0x174>
+			SET_BIT(DDRD.Byte,PinLoc);
+ 174:	a1 e3       	ldi	r26, 0x31	; 49
+ 176:	b0 e0       	ldi	r27, 0x00	; 0
+ 178:	e1 e3       	ldi	r30, 0x31	; 49
+ 17a:	f0 e0       	ldi	r31, 0x00	; 0
+ 17c:	80 81       	ld	r24, Z
+ 17e:	48 2f       	mov	r20, r24
+ 180:	89 81       	ldd	r24, Y+1	; 0x01
+ 182:	28 2f       	mov	r18, r24
+ 184:	30 e0       	ldi	r19, 0x00	; 0
+ 186:	81 e0       	ldi	r24, 0x01	; 1
+ 188:	90 e0       	ldi	r25, 0x00	; 0
+ 18a:	02 2e       	mov	r0, r18
+ 18c:	00 c0       	rjmp	.+0      	; 0x18e <Dio_vidSetPinDir+0x18e>
+ 18e:	88 0f       	add	r24, r24
+ 190:	99 1f       	adc	r25, r25
+ 192:	0a 94       	dec	r0
+ 194:	02 f4       	brpl	.+0      	; 0x196 <Dio_vidSetPinDir+0x196>
+ 196:	84 2b       	or	r24, r20
+ 198:	8c 93       	st	X, r24
+ 19a:	00 c0       	rjmp	.+0      	; 0x19c <Dio_vidSetPinDir+0x19c>
+		}
+		else {
+			CLR_BIT(DDRD.Byte,PinLoc);
+ 19c:	a1 e3       	ldi	r26, 0x31	; 49
+ 19e:	b0 e0       	ldi	r27, 0x00	; 0
+ 1a0:	e1 e3       	ldi	r30, 0x31	; 49
+ 1a2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1a4:	80 81       	ld	r24, Z
+ 1a6:	48 2f       	mov	r20, r24
+ 1a8:	89 81       	ldd	r24, Y+1	; 0x01
+ 1aa:	28 2f       	mov	r18, r24
+ 1ac:	30 e0       	ldi	r19, 0x00	; 0
+ 1ae:	81 e0       	ldi	r24, 0x01	; 1
+ 1b0:	90 e0       	ldi	r25, 0x00	; 0
+ 1b2:	02 2e       	mov	r0, r18
+ 1b4:	00 c0       	rjmp	.+0      	; 0x1b6 <Dio_vidSetPinDir+0x1b6>
+ 1b6:	88 0f       	add	r24, r24
+ 1b8:	99 1f       	adc	r25, r25
+ 1ba:	0a 94       	dec	r0
+ 1bc:	02 f4       	brpl	.+0      	; 0x1be <Dio_vidSetPinDir+0x1be>
+ 1be:	80 95       	com	r24
+ 1c0:	84 23       	and	r24, r20
+ 1c2:	8c 93       	st	X, r24
+		}
+		break;
+	}
+}
+ 1c4:	26 96       	adiw	r28, 0x06	; 6
+ 1c6:	0f b6       	in	r0, 0x3f	; 63
+ 1c8:	f8 94       	cli
+ 1ca:	de bf       	out	0x3e, r29	; 62
+ 1cc:	0f be       	out	0x3f, r0	; 63
+ 1ce:	cd bf       	out	0x3d, r28	; 61
+ 1d0:	cf 91       	pop	r28
+ 1d2:	df 91       	pop	r29
+ 1d4:	08 95       	ret
+
+Disassembly of section .text.Dio_vidSetPinVal:
+
+00000000 <Dio_vidSetPinVal>:
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#include"Dio_Priv.h"
+#include"Dio_int.h"
+
+void Dio_vidSetPinDir(u8 Pin, u8 Dir){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <Dio_vidSetPinVal+0x6>
+   6:	00 d0       	rcall	.+0      	; 0x8 <Dio_vidSetPinVal+0x8>
+   8:	00 d0       	rcall	.+0      	; 0xa <Dio_vidSetPinVal+0xa>
+   a:	cd b7       	in	r28, 0x3d	; 61
+   c:	de b7       	in	r29, 0x3e	; 62
+   e:	8b 83       	std	Y+3, r24	; 0x03
+  10:	6c 83       	std	Y+4, r22	; 0x04
+	u8 PortId;
+	u8 PinLoc;
+	PortId=Pin/8;
+  12:	8b 81       	ldd	r24, Y+3	; 0x03
+  14:	86 95       	lsr	r24
+  16:	86 95       	lsr	r24
+  18:	86 95       	lsr	r24
+  1a:	8a 83       	std	Y+2, r24	; 0x02
+	PinLoc=Pin%8;
+  1c:	8b 81       	ldd	r24, Y+3	; 0x03
+  1e:	87 70       	andi	r24, 0x07	; 7
+  20:	89 83       	std	Y+1, r24	; 0x01
+	switch(PortId){
+  22:	8a 81       	ldd	r24, Y+2	; 0x02
+  24:	28 2f       	mov	r18, r24
+  26:	30 e0       	ldi	r19, 0x00	; 0
+  28:	3e 83       	std	Y+6, r19	; 0x06
+  2a:	2d 83       	std	Y+5, r18	; 0x05
+  2c:	8d 81       	ldd	r24, Y+5	; 0x05
+  2e:	9e 81       	ldd	r25, Y+6	; 0x06
+  30:	81 30       	cpi	r24, 0x01	; 1
+  32:	91 05       	cpc	r25, r1
+  34:	01 f4       	brne	.+0      	; 0x36 <Dio_vidSetPinVal+0x36>
+  36:	00 c0       	rjmp	.+0      	; 0x38 <Dio_vidSetPinVal+0x38>
+  38:	2d 81       	ldd	r18, Y+5	; 0x05
+  3a:	3e 81       	ldd	r19, Y+6	; 0x06
+  3c:	22 30       	cpi	r18, 0x02	; 2
+  3e:	31 05       	cpc	r19, r1
+  40:	04 f4       	brge	.+0      	; 0x42 <Dio_vidSetPinVal+0x42>
+  42:	8d 81       	ldd	r24, Y+5	; 0x05
+  44:	9e 81       	ldd	r25, Y+6	; 0x06
+  46:	00 97       	sbiw	r24, 0x00	; 0
+  48:	01 f0       	breq	.+0      	; 0x4a <Dio_vidSetPinVal+0x4a>
+  4a:	00 c0       	rjmp	.+0      	; 0x4c <Dio_vidSetPinVal+0x4c>
+  4c:	2d 81       	ldd	r18, Y+5	; 0x05
+  4e:	3e 81       	ldd	r19, Y+6	; 0x06
+  50:	22 30       	cpi	r18, 0x02	; 2
+  52:	31 05       	cpc	r19, r1
+  54:	01 f4       	brne	.+0      	; 0x56 <Dio_vidSetPinVal+0x56>
+  56:	00 c0       	rjmp	.+0      	; 0x58 <Dio_vidSetPinVal+0x58>
+  58:	8d 81       	ldd	r24, Y+5	; 0x05
+  5a:	9e 81       	ldd	r25, Y+6	; 0x06
+  5c:	83 30       	cpi	r24, 0x03	; 3
+  5e:	91 05       	cpc	r25, r1
+  60:	01 f4       	brne	.+0      	; 0x62 <Dio_vidSetPinVal+0x62>
+  62:	00 c0       	rjmp	.+0      	; 0x64 <Dio_vidSetPinVal+0x64>
+  64:	00 c0       	rjmp	.+0      	; 0x66 <Dio_vidSetPinVal+0x66>
+	case 0:	//DDRA
+		if(Dir==1){
+  66:	8c 81       	ldd	r24, Y+4	; 0x04
+  68:	81 30       	cpi	r24, 0x01	; 1
+  6a:	01 f4       	brne	.+0      	; 0x6c <Dio_vidSetPinVal+0x6c>
+			SET_BIT(DDRA.Byte,PinLoc);
+  6c:	ab e3       	ldi	r26, 0x3B	; 59
+  6e:	b0 e0       	ldi	r27, 0x00	; 0
+  70:	eb e3       	ldi	r30, 0x3B	; 59
+  72:	f0 e0       	ldi	r31, 0x00	; 0
+  74:	80 81       	ld	r24, Z
+  76:	48 2f       	mov	r20, r24
+  78:	89 81       	ldd	r24, Y+1	; 0x01
+  7a:	28 2f       	mov	r18, r24
+  7c:	30 e0       	ldi	r19, 0x00	; 0
+  7e:	81 e0       	ldi	r24, 0x01	; 1
+  80:	90 e0       	ldi	r25, 0x00	; 0
+  82:	02 2e       	mov	r0, r18
+  84:	00 c0       	rjmp	.+0      	; 0x86 <Dio_vidSetPinVal+0x86>
+  86:	88 0f       	add	r24, r24
+  88:	99 1f       	adc	r25, r25
+  8a:	0a 94       	dec	r0
+  8c:	02 f4       	brpl	.+0      	; 0x8e <Dio_vidSetPinVal+0x8e>
+  8e:	84 2b       	or	r24, r20
+  90:	8c 93       	st	X, r24
+  92:	00 c0       	rjmp	.+0      	; 0x94 <Dio_vidSetPinVal+0x94>
+		}
+		else {
+			CLR_BIT(DDRA.Byte,PinLoc);
+  94:	ab e3       	ldi	r26, 0x3B	; 59
+  96:	b0 e0       	ldi	r27, 0x00	; 0
+  98:	eb e3       	ldi	r30, 0x3B	; 59
+  9a:	f0 e0       	ldi	r31, 0x00	; 0
+  9c:	80 81       	ld	r24, Z
+  9e:	48 2f       	mov	r20, r24
+  a0:	89 81       	ldd	r24, Y+1	; 0x01
+  a2:	28 2f       	mov	r18, r24
+  a4:	30 e0       	ldi	r19, 0x00	; 0
+  a6:	81 e0       	ldi	r24, 0x01	; 1
+  a8:	90 e0       	ldi	r25, 0x00	; 0
+  aa:	02 2e       	mov	r0, r18
+  ac:	00 c0       	rjmp	.+0      	; 0xae <Dio_vidSetPinVal+0xae>
+  ae:	88 0f       	add	r24, r24
+  b0:	99 1f       	adc	r25, r25
+  b2:	0a 94       	dec	r0
+  b4:	02 f4       	brpl	.+0      	; 0xb6 <Dio_vidSetPinVal+0xb6>
+  b6:	80 95       	com	r24
+  b8:	84 23       	and	r24, r20
+  ba:	8c 93       	st	X, r24
+  bc:	00 c0       	rjmp	.+0      	; 0xbe <Dio_vidSetPinVal+0xbe>
+		}
+		break;
+	case 1:	//DDRB
+		if(Dir==1){
+  be:	8c 81       	ldd	r24, Y+4	; 0x04
+  c0:	81 30       	cpi	r24, 0x01	; 1
+  c2:	01 f4       	brne	.+0      	; 0xc4 <Dio_vidSetPinVal+0xc4>
+			SET_BIT(DDRB.Byte,PinLoc);
+  c4:	a8 e3       	ldi	r26, 0x38	; 56
+  c6:	b0 e0       	ldi	r27, 0x00	; 0
+  c8:	e8 e3       	ldi	r30, 0x38	; 56
+  ca:	f0 e0       	ldi	r31, 0x00	; 0
+  cc:	80 81       	ld	r24, Z
+  ce:	48 2f       	mov	r20, r24
+  d0:	89 81       	ldd	r24, Y+1	; 0x01
+  d2:	28 2f       	mov	r18, r24
+  d4:	30 e0       	ldi	r19, 0x00	; 0
+  d6:	81 e0       	ldi	r24, 0x01	; 1
+  d8:	90 e0       	ldi	r25, 0x00	; 0
+  da:	02 2e       	mov	r0, r18
+  dc:	00 c0       	rjmp	.+0      	; 0xde <Dio_vidSetPinVal+0xde>
+  de:	88 0f       	add	r24, r24
+  e0:	99 1f       	adc	r25, r25
+  e2:	0a 94       	dec	r0
+  e4:	02 f4       	brpl	.+0      	; 0xe6 <Dio_vidSetPinVal+0xe6>
+  e6:	84 2b       	or	r24, r20
+  e8:	8c 93       	st	X, r24
+  ea:	00 c0       	rjmp	.+0      	; 0xec <Dio_vidSetPinVal+0xec>
+		}
+		else {
+			CLR_BIT(DDRB.Byte,PinLoc);
+  ec:	a8 e3       	ldi	r26, 0x38	; 56
+  ee:	b0 e0       	ldi	r27, 0x00	; 0
+  f0:	e8 e3       	ldi	r30, 0x38	; 56
+  f2:	f0 e0       	ldi	r31, 0x00	; 0
+  f4:	80 81       	ld	r24, Z
+  f6:	48 2f       	mov	r20, r24
+  f8:	89 81       	ldd	r24, Y+1	; 0x01
+  fa:	28 2f       	mov	r18, r24
+  fc:	30 e0       	ldi	r19, 0x00	; 0
+  fe:	81 e0       	ldi	r24, 0x01	; 1
+ 100:	90 e0       	ldi	r25, 0x00	; 0
+ 102:	02 2e       	mov	r0, r18
+ 104:	00 c0       	rjmp	.+0      	; 0x106 <Dio_vidSetPinVal+0x106>
+ 106:	88 0f       	add	r24, r24
+ 108:	99 1f       	adc	r25, r25
+ 10a:	0a 94       	dec	r0
+ 10c:	02 f4       	brpl	.+0      	; 0x10e <Dio_vidSetPinVal+0x10e>
+ 10e:	80 95       	com	r24
+ 110:	84 23       	and	r24, r20
+ 112:	8c 93       	st	X, r24
+ 114:	00 c0       	rjmp	.+0      	; 0x116 <Dio_vidSetPinVal+0x116>
+		}
+		break;
+	case 2:	//DDRC
+		if(Dir==1){
+ 116:	8c 81       	ldd	r24, Y+4	; 0x04
+ 118:	81 30       	cpi	r24, 0x01	; 1
+ 11a:	01 f4       	brne	.+0      	; 0x11c <Dio_vidSetPinVal+0x11c>
+			SET_BIT(DDRC.Byte,PinLoc);
+ 11c:	a5 e3       	ldi	r26, 0x35	; 53
+ 11e:	b0 e0       	ldi	r27, 0x00	; 0
+ 120:	e5 e3       	ldi	r30, 0x35	; 53
+ 122:	f0 e0       	ldi	r31, 0x00	; 0
+ 124:	80 81       	ld	r24, Z
+ 126:	48 2f       	mov	r20, r24
+ 128:	89 81       	ldd	r24, Y+1	; 0x01
+ 12a:	28 2f       	mov	r18, r24
+ 12c:	30 e0       	ldi	r19, 0x00	; 0
+ 12e:	81 e0       	ldi	r24, 0x01	; 1
+ 130:	90 e0       	ldi	r25, 0x00	; 0
+ 132:	02 2e       	mov	r0, r18
+ 134:	00 c0       	rjmp	.+0      	; 0x136 <Dio_vidSetPinVal+0x136>
+ 136:	88 0f       	add	r24, r24
+ 138:	99 1f       	adc	r25, r25
+ 13a:	0a 94       	dec	r0
+ 13c:	02 f4       	brpl	.+0      	; 0x13e <Dio_vidSetPinVal+0x13e>
+ 13e:	84 2b       	or	r24, r20
+ 140:	8c 93       	st	X, r24
+ 142:	00 c0       	rjmp	.+0      	; 0x144 <Dio_vidSetPinVal+0x144>
+		}
+		else {
+			CLR_BIT(DDRC.Byte,PinLoc);
+ 144:	a5 e3       	ldi	r26, 0x35	; 53
+ 146:	b0 e0       	ldi	r27, 0x00	; 0
+ 148:	e5 e3       	ldi	r30, 0x35	; 53
+ 14a:	f0 e0       	ldi	r31, 0x00	; 0
+ 14c:	80 81       	ld	r24, Z
+ 14e:	48 2f       	mov	r20, r24
+ 150:	89 81       	ldd	r24, Y+1	; 0x01
+ 152:	28 2f       	mov	r18, r24
+ 154:	30 e0       	ldi	r19, 0x00	; 0
+ 156:	81 e0       	ldi	r24, 0x01	; 1
+ 158:	90 e0       	ldi	r25, 0x00	; 0
+ 15a:	02 2e       	mov	r0, r18
+ 15c:	00 c0       	rjmp	.+0      	; 0x15e <Dio_vidSetPinVal+0x15e>
+ 15e:	88 0f       	add	r24, r24
+ 160:	99 1f       	adc	r25, r25
+ 162:	0a 94       	dec	r0
+ 164:	02 f4       	brpl	.+0      	; 0x166 <Dio_vidSetPinVal+0x166>
+ 166:	80 95       	com	r24
+ 168:	84 23       	and	r24, r20
+ 16a:	8c 93       	st	X, r24
+ 16c:	00 c0       	rjmp	.+0      	; 0x16e <Dio_vidSetPinVal+0x16e>
+		}
+		break;
+	case 3:	//DDRD
+		if(Dir==1){
+ 16e:	8c 81       	ldd	r24, Y+4	; 0x04
+ 170:	81 30       	cpi	r24, 0x01	; 1
+ 172:	01 f4       	brne	.+0      	; 0x174 <Dio_vidSetPinVal+0x174>
+			SET_BIT(DDRD.Byte,PinLoc);
+ 174:	a2 e3       	ldi	r26, 0x32	; 50
+ 176:	b0 e0       	ldi	r27, 0x00	; 0
+ 178:	e2 e3       	ldi	r30, 0x32	; 50
+ 17a:	f0 e0       	ldi	r31, 0x00	; 0
+ 17c:	80 81       	ld	r24, Z
+ 17e:	48 2f       	mov	r20, r24
+ 180:	89 81       	ldd	r24, Y+1	; 0x01
+ 182:	28 2f       	mov	r18, r24
+ 184:	30 e0       	ldi	r19, 0x00	; 0
+ 186:	81 e0       	ldi	r24, 0x01	; 1
+ 188:	90 e0       	ldi	r25, 0x00	; 0
+ 18a:	02 2e       	mov	r0, r18
+ 18c:	00 c0       	rjmp	.+0      	; 0x18e <Dio_vidSetPinVal+0x18e>
+ 18e:	88 0f       	add	r24, r24
+ 190:	99 1f       	adc	r25, r25
+ 192:	0a 94       	dec	r0
+ 194:	02 f4       	brpl	.+0      	; 0x196 <Dio_vidSetPinVal+0x196>
+ 196:	84 2b       	or	r24, r20
+ 198:	8c 93       	st	X, r24
+ 19a:	00 c0       	rjmp	.+0      	; 0x19c <Dio_vidSetPinVal+0x19c>
+		}
+		else {
+			CLR_BIT(DDRD.Byte,PinLoc);
+ 19c:	a2 e3       	ldi	r26, 0x32	; 50
+ 19e:	b0 e0       	ldi	r27, 0x00	; 0
+ 1a0:	e2 e3       	ldi	r30, 0x32	; 50
+ 1a2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1a4:	80 81       	ld	r24, Z
+ 1a6:	48 2f       	mov	r20, r24
+ 1a8:	89 81       	ldd	r24, Y+1	; 0x01
+ 1aa:	28 2f       	mov	r18, r24
+ 1ac:	30 e0       	ldi	r19, 0x00	; 0
+ 1ae:	81 e0       	ldi	r24, 0x01	; 1
+ 1b0:	90 e0       	ldi	r25, 0x00	; 0
+ 1b2:	02 2e       	mov	r0, r18
+ 1b4:	00 c0       	rjmp	.+0      	; 0x1b6 <Dio_vidSetPinVal+0x1b6>
+ 1b6:	88 0f       	add	r24, r24
+ 1b8:	99 1f       	adc	r25, r25
+ 1ba:	0a 94       	dec	r0
+ 1bc:	02 f4       	brpl	.+0      	; 0x1be <Dio_vidSetPinVal+0x1be>
+ 1be:	80 95       	com	r24
+ 1c0:	84 23       	and	r24, r20
+ 1c2:	8c 93       	st	X, r24
+		}
+		break;
+	}
+}
+ 1c4:	26 96       	adiw	r28, 0x06	; 6
+ 1c6:	0f b6       	in	r0, 0x3f	; 63
+ 1c8:	f8 94       	cli
+ 1ca:	de bf       	out	0x3e, r29	; 62
+ 1cc:	0f be       	out	0x3f, r0	; 63
+ 1ce:	cd bf       	out	0x3d, r28	; 61
+ 1d0:	cf 91       	pop	r28
+ 1d2:	df 91       	pop	r29
+ 1d4:	08 95       	ret
+
+Disassembly of section .text.Dio_u8GetPinVal:
+
+00000000 <Dio_u8GetPinVal>:
+#include"../Lib/Std_types.h"
+#include"../Lib/Bit_math.h"
+#include"Dio_Priv.h"
+#include"Dio_int.h"
+
+void Dio_vidSetPinDir(u8 Pin, u8 Dir){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <Dio_u8GetPinVal+0x6>
+   6:	00 d0       	rcall	.+0      	; 0x8 <Dio_u8GetPinVal+0x8>
+   8:	00 d0       	rcall	.+0      	; 0xa <Dio_u8GetPinVal+0xa>
+   a:	cd b7       	in	r28, 0x3d	; 61
+   c:	de b7       	in	r29, 0x3e	; 62
+   e:	8c 83       	std	Y+4, r24	; 0x04
+  10:	19 82       	std	Y+1, r1	; 0x01
+	u8 PortId;
+	u8 PinLoc;
+	PortId=Pin/8;
+  12:	8c 81       	ldd	r24, Y+4	; 0x04
+  14:	80 32       	cpi	r24, 0x20	; 32
+  16:	00 f0       	brcs	.+0      	; 0x18 <Dio_u8GetPinVal+0x18>
+  18:	82 e0       	ldi	r24, 0x02	; 2
+  1a:	89 83       	std	Y+1, r24	; 0x01
+	PinLoc=Pin%8;
+  1c:	00 c0       	rjmp	.+0      	; 0x1e <Dio_u8GetPinVal+0x1e>
+  1e:	8c 81       	ldd	r24, Y+4	; 0x04
+  20:	86 95       	lsr	r24
+	switch(PortId){
+  22:	86 95       	lsr	r24
+  24:	86 95       	lsr	r24
+  26:	8b 83       	std	Y+3, r24	; 0x03
+  28:	8c 81       	ldd	r24, Y+4	; 0x04
+  2a:	87 70       	andi	r24, 0x07	; 7
+  2c:	8a 83       	std	Y+2, r24	; 0x02
+  2e:	8b 81       	ldd	r24, Y+3	; 0x03
+  30:	28 2f       	mov	r18, r24
+  32:	30 e0       	ldi	r19, 0x00	; 0
+  34:	3e 83       	std	Y+6, r19	; 0x06
+  36:	2d 83       	std	Y+5, r18	; 0x05
+  38:	4d 81       	ldd	r20, Y+5	; 0x05
+  3a:	5e 81       	ldd	r21, Y+6	; 0x06
+  3c:	41 30       	cpi	r20, 0x01	; 1
+  3e:	51 05       	cpc	r21, r1
+  40:	01 f0       	breq	.+0      	; 0x42 <Dio_u8GetPinVal+0x42>
+  42:	8d 81       	ldd	r24, Y+5	; 0x05
+  44:	9e 81       	ldd	r25, Y+6	; 0x06
+  46:	82 30       	cpi	r24, 0x02	; 2
+  48:	91 05       	cpc	r25, r1
+  4a:	04 f4       	brge	.+0      	; 0x4c <Dio_u8GetPinVal+0x4c>
+  4c:	2d 81       	ldd	r18, Y+5	; 0x05
+  4e:	3e 81       	ldd	r19, Y+6	; 0x06
+  50:	21 15       	cp	r18, r1
+  52:	31 05       	cpc	r19, r1
+  54:	01 f0       	breq	.+0      	; 0x56 <Dio_u8GetPinVal+0x56>
+  56:	00 c0       	rjmp	.+0      	; 0x58 <Dio_u8GetPinVal+0x58>
+  58:	4d 81       	ldd	r20, Y+5	; 0x05
+  5a:	5e 81       	ldd	r21, Y+6	; 0x06
+  5c:	42 30       	cpi	r20, 0x02	; 2
+  5e:	51 05       	cpc	r21, r1
+  60:	01 f0       	breq	.+0      	; 0x62 <Dio_u8GetPinVal+0x62>
+  62:	8d 81       	ldd	r24, Y+5	; 0x05
+  64:	9e 81       	ldd	r25, Y+6	; 0x06
+	case 0:	//DDRA
+		if(Dir==1){
+  66:	83 30       	cpi	r24, 0x03	; 3
+  68:	91 05       	cpc	r25, r1
+  6a:	01 f0       	breq	.+0      	; 0x6c <Dio_u8GetPinVal+0x6c>
+			SET_BIT(DDRA.Byte,PinLoc);
+  6c:	00 c0       	rjmp	.+0      	; 0x6e <Dio_u8GetPinVal+0x6e>
+  6e:	e9 e3       	ldi	r30, 0x39	; 57
+  70:	f0 e0       	ldi	r31, 0x00	; 0
+  72:	80 81       	ld	r24, Z
+  74:	28 2f       	mov	r18, r24
+  76:	30 e0       	ldi	r19, 0x00	; 0
+  78:	8a 81       	ldd	r24, Y+2	; 0x02
+  7a:	88 2f       	mov	r24, r24
+  7c:	90 e0       	ldi	r25, 0x00	; 0
+  7e:	a9 01       	movw	r20, r18
+  80:	00 c0       	rjmp	.+0      	; 0x82 <Dio_u8GetPinVal+0x82>
+  82:	55 95       	asr	r21
+  84:	47 95       	ror	r20
+  86:	8a 95       	dec	r24
+  88:	02 f4       	brpl	.+0      	; 0x8a <Dio_u8GetPinVal+0x8a>
+  8a:	ca 01       	movw	r24, r20
+  8c:	81 70       	andi	r24, 0x01	; 1
+  8e:	89 83       	std	Y+1, r24	; 0x01
+  90:	00 c0       	rjmp	.+0      	; 0x92 <Dio_u8GetPinVal+0x92>
+  92:	e6 e3       	ldi	r30, 0x36	; 54
+		}
+		else {
+			CLR_BIT(DDRA.Byte,PinLoc);
+  94:	f0 e0       	ldi	r31, 0x00	; 0
+  96:	80 81       	ld	r24, Z
+  98:	28 2f       	mov	r18, r24
+  9a:	30 e0       	ldi	r19, 0x00	; 0
+  9c:	8a 81       	ldd	r24, Y+2	; 0x02
+  9e:	88 2f       	mov	r24, r24
+  a0:	90 e0       	ldi	r25, 0x00	; 0
+  a2:	a9 01       	movw	r20, r18
+  a4:	00 c0       	rjmp	.+0      	; 0xa6 <Dio_u8GetPinVal+0xa6>
+  a6:	55 95       	asr	r21
+  a8:	47 95       	ror	r20
+  aa:	8a 95       	dec	r24
+  ac:	02 f4       	brpl	.+0      	; 0xae <Dio_u8GetPinVal+0xae>
+  ae:	ca 01       	movw	r24, r20
+  b0:	81 70       	andi	r24, 0x01	; 1
+  b2:	89 83       	std	Y+1, r24	; 0x01
+  b4:	00 c0       	rjmp	.+0      	; 0xb6 <Dio_u8GetPinVal+0xb6>
+  b6:	e3 e3       	ldi	r30, 0x33	; 51
+  b8:	f0 e0       	ldi	r31, 0x00	; 0
+  ba:	80 81       	ld	r24, Z
+  bc:	28 2f       	mov	r18, r24
+		}
+		break;
+	case 1:	//DDRB
+		if(Dir==1){
+  be:	30 e0       	ldi	r19, 0x00	; 0
+  c0:	8a 81       	ldd	r24, Y+2	; 0x02
+  c2:	88 2f       	mov	r24, r24
+			SET_BIT(DDRB.Byte,PinLoc);
+  c4:	90 e0       	ldi	r25, 0x00	; 0
+  c6:	a9 01       	movw	r20, r18
+  c8:	00 c0       	rjmp	.+0      	; 0xca <Dio_u8GetPinVal+0xca>
+  ca:	55 95       	asr	r21
+  cc:	47 95       	ror	r20
+  ce:	8a 95       	dec	r24
+  d0:	02 f4       	brpl	.+0      	; 0xd2 <Dio_u8GetPinVal+0xd2>
+  d2:	ca 01       	movw	r24, r20
+  d4:	81 70       	andi	r24, 0x01	; 1
+  d6:	89 83       	std	Y+1, r24	; 0x01
+  d8:	00 c0       	rjmp	.+0      	; 0xda <Dio_u8GetPinVal+0xda>
+  da:	e0 e3       	ldi	r30, 0x30	; 48
+  dc:	f0 e0       	ldi	r31, 0x00	; 0
+  de:	80 81       	ld	r24, Z
+  e0:	28 2f       	mov	r18, r24
+  e2:	30 e0       	ldi	r19, 0x00	; 0
+  e4:	8a 81       	ldd	r24, Y+2	; 0x02
+  e6:	88 2f       	mov	r24, r24
+  e8:	90 e0       	ldi	r25, 0x00	; 0
+  ea:	a9 01       	movw	r20, r18
+		}
+		else {
+			CLR_BIT(DDRB.Byte,PinLoc);
+  ec:	00 c0       	rjmp	.+0      	; 0xee <Dio_u8GetPinVal+0xee>
+  ee:	55 95       	asr	r21
+  f0:	47 95       	ror	r20
+  f2:	8a 95       	dec	r24
+  f4:	02 f4       	brpl	.+0      	; 0xf6 <Dio_u8GetPinVal+0xf6>
+  f6:	ca 01       	movw	r24, r20
+  f8:	81 70       	andi	r24, 0x01	; 1
+  fa:	89 83       	std	Y+1, r24	; 0x01
+  fc:	89 81       	ldd	r24, Y+1	; 0x01
+  fe:	26 96       	adiw	r28, 0x06	; 6
+ 100:	0f b6       	in	r0, 0x3f	; 63
+ 102:	f8 94       	cli
+ 104:	de bf       	out	0x3e, r29	; 62
+ 106:	0f be       	out	0x3f, r0	; 63
+ 108:	cd bf       	out	0x3d, r28	; 61
+ 10a:	cf 91       	pop	r28
+ 10c:	df 91       	pop	r29
+ 10e:	08 95       	ret
+
+LED_prg.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .stab         00000540  00000000  00000000  00000034  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  4 .stabstr      0000085d  00000000  00000000  00000574  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .text.Led_vidInit 000000d0  00000000  00000000  00000dd1  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  6 .text.Led_u8TurnON 000000d0  00000000  00000000  00000ea1  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .text.Led_u8TurnOFF 000000d0  00000000  00000000  00000f71  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+
+Disassembly of section .text.Led_vidInit:
+
+00000000 <Led_vidInit>:
+#include"Dio_int.h"
+#include"LED_cfg.h"
+#include<avr/io.h>
+#include "LED_int.h"
+
+void Led_vidInit(u8 LedID){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <Led_vidInit+0x6>
+   6:	0f 92       	push	r0
+   8:	cd b7       	in	r28, 0x3d	; 61
+   a:	de b7       	in	r29, 0x3e	; 62
+   c:	89 83       	std	Y+1, r24	; 0x01
+	switch(LedID){
+   e:	89 81       	ldd	r24, Y+1	; 0x01
+  10:	28 2f       	mov	r18, r24
+  12:	30 e0       	ldi	r19, 0x00	; 0
+  14:	3b 83       	std	Y+3, r19	; 0x03
+  16:	2a 83       	std	Y+2, r18	; 0x02
+  18:	8a 81       	ldd	r24, Y+2	; 0x02
+  1a:	9b 81       	ldd	r25, Y+3	; 0x03
+  1c:	84 30       	cpi	r24, 0x04	; 4
+  1e:	91 05       	cpc	r25, r1
+  20:	01 f0       	breq	.+0      	; 0x22 <Led_vidInit+0x22>
+  22:	2a 81       	ldd	r18, Y+2	; 0x02
+  24:	3b 81       	ldd	r19, Y+3	; 0x03
+  26:	25 30       	cpi	r18, 0x05	; 5
+  28:	31 05       	cpc	r19, r1
+  2a:	04 f4       	brge	.+0      	; 0x2c <Led_vidInit+0x2c>
+  2c:	8a 81       	ldd	r24, Y+2	; 0x02
+  2e:	9b 81       	ldd	r25, Y+3	; 0x03
+  30:	82 30       	cpi	r24, 0x02	; 2
+  32:	91 05       	cpc	r25, r1
+  34:	01 f0       	breq	.+0      	; 0x36 <Led_vidInit+0x36>
+  36:	2a 81       	ldd	r18, Y+2	; 0x02
+  38:	3b 81       	ldd	r19, Y+3	; 0x03
+  3a:	23 30       	cpi	r18, 0x03	; 3
+  3c:	31 05       	cpc	r19, r1
+  3e:	04 f4       	brge	.+0      	; 0x40 <Led_vidInit+0x40>
+  40:	8a 81       	ldd	r24, Y+2	; 0x02
+  42:	9b 81       	ldd	r25, Y+3	; 0x03
+  44:	81 30       	cpi	r24, 0x01	; 1
+  46:	91 05       	cpc	r25, r1
+  48:	01 f0       	breq	.+0      	; 0x4a <Led_vidInit+0x4a>
+  4a:	00 c0       	rjmp	.+0      	; 0x4c <Led_vidInit+0x4c>
+  4c:	2a 81       	ldd	r18, Y+2	; 0x02
+  4e:	3b 81       	ldd	r19, Y+3	; 0x03
+  50:	26 30       	cpi	r18, 0x06	; 6
+  52:	31 05       	cpc	r19, r1
+  54:	01 f0       	breq	.+0      	; 0x56 <Led_vidInit+0x56>
+  56:	8a 81       	ldd	r24, Y+2	; 0x02
+  58:	9b 81       	ldd	r25, Y+3	; 0x03
+  5a:	86 30       	cpi	r24, 0x06	; 6
+  5c:	91 05       	cpc	r25, r1
+  5e:	04 f0       	brlt	.+0      	; 0x60 <Led_vidInit+0x60>
+  60:	2a 81       	ldd	r18, Y+2	; 0x02
+  62:	3b 81       	ldd	r19, Y+3	; 0x03
+  64:	27 30       	cpi	r18, 0x07	; 7
+  66:	31 05       	cpc	r19, r1
+  68:	01 f0       	breq	.+0      	; 0x6a <Led_vidInit+0x6a>
+  6a:	8a 81       	ldd	r24, Y+2	; 0x02
+  6c:	9b 81       	ldd	r25, Y+3	; 0x03
+  6e:	88 30       	cpi	r24, 0x08	; 8
+  70:	91 05       	cpc	r25, r1
+  72:	01 f0       	breq	.+0      	; 0x74 <Led_vidInit+0x74>
+  74:	00 c0       	rjmp	.+0      	; 0x76 <Led_vidInit+0x76>
+	case 1:
+		Dio_vidSetPinDir(LED_u8ID_1,DIO_u8HIGH);	//Setting 1st 2 pins
+  76:	80 e0       	ldi	r24, 0x00	; 0
+  78:	61 e0       	ldi	r22, 0x01	; 1
+  7a:	0e 94 00 00 	call	0	; 0x0 <Led_vidInit>
+  7e:	00 c0       	rjmp	.+0      	; 0x80 <Led_vidInit+0x80>
+		break;
+	case 2:
+		Dio_vidSetPinDir(LED_u8ID_2,DIO_u8HIGH);	//of PORTA to output
+  80:	81 e0       	ldi	r24, 0x01	; 1
+  82:	61 e0       	ldi	r22, 0x01	; 1
+  84:	0e 94 00 00 	call	0	; 0x0 <Led_vidInit>
+  88:	00 c0       	rjmp	.+0      	; 0x8a <Led_vidInit+0x8a>
+		break;
+	case 3:
+		Dio_vidSetPinDir(LED_u8ID_3,DIO_u8HIGH);	//Setting 2nd 2 pins
+  8a:	8a e0       	ldi	r24, 0x0A	; 10
+  8c:	61 e0       	ldi	r22, 0x01	; 1
+  8e:	0e 94 00 00 	call	0	; 0x0 <Led_vidInit>
+  92:	00 c0       	rjmp	.+0      	; 0x94 <Led_vidInit+0x94>
+		break;
+	case 4:
+		Dio_vidSetPinDir(LED_u8ID_4,DIO_u8HIGH);	//of PORTB to output
+  94:	8b e0       	ldi	r24, 0x0B	; 11
+  96:	61 e0       	ldi	r22, 0x01	; 1
+  98:	0e 94 00 00 	call	0	; 0x0 <Led_vidInit>
+  9c:	00 c0       	rjmp	.+0      	; 0x9e <Led_vidInit+0x9e>
+		break;
+	case 5:
+		Dio_vidSetPinDir(LED_u8ID_5,DIO_u8HIGH);	//Setting 3rd 2 pins
+  9e:	84 e1       	ldi	r24, 0x14	; 20
+  a0:	61 e0       	ldi	r22, 0x01	; 1
+  a2:	0e 94 00 00 	call	0	; 0x0 <Led_vidInit>
+  a6:	00 c0       	rjmp	.+0      	; 0xa8 <Led_vidInit+0xa8>
+		break;
+	case 6:
+		Dio_vidSetPinDir(LED_u8ID_6,DIO_u8HIGH);	//of PORTC to output
+  a8:	85 e1       	ldi	r24, 0x15	; 21
+  aa:	61 e0       	ldi	r22, 0x01	; 1
+  ac:	0e 94 00 00 	call	0	; 0x0 <Led_vidInit>
+  b0:	00 c0       	rjmp	.+0      	; 0xb2 <Led_vidInit+0xb2>
+		break;
+	case 7:
+		Dio_vidSetPinDir(LED_u8ID_7,DIO_u8HIGH);	//Setting 4th 2 pins
+  b2:	8e e1       	ldi	r24, 0x1E	; 30
+  b4:	61 e0       	ldi	r22, 0x01	; 1
+  b6:	0e 94 00 00 	call	0	; 0x0 <Led_vidInit>
+  ba:	00 c0       	rjmp	.+0      	; 0xbc <Led_vidInit+0xbc>
+		break;
+	case 8:
+		Dio_vidSetPinDir(LED_u8ID_8,DIO_u8HIGH);	//of PORTD to output
+  bc:	8f e1       	ldi	r24, 0x1F	; 31
+  be:	61 e0       	ldi	r22, 0x01	; 1
+  c0:	0e 94 00 00 	call	0	; 0x0 <Led_vidInit>
+		break;
+	}
+}
+  c4:	0f 90       	pop	r0
+  c6:	0f 90       	pop	r0
+  c8:	0f 90       	pop	r0
+  ca:	cf 91       	pop	r28
+  cc:	df 91       	pop	r29
+  ce:	08 95       	ret
+
+Disassembly of section .text.Led_u8TurnON:
+
+00000000 <Led_u8TurnON>:
+#include"Dio_int.h"
+#include"LED_cfg.h"
+#include<avr/io.h>
+#include "LED_int.h"
+
+void Led_vidInit(u8 LedID){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <Led_u8TurnON+0x6>
+   6:	0f 92       	push	r0
+   8:	cd b7       	in	r28, 0x3d	; 61
+   a:	de b7       	in	r29, 0x3e	; 62
+   c:	89 83       	std	Y+1, r24	; 0x01
+	switch(LedID){
+   e:	89 81       	ldd	r24, Y+1	; 0x01
+  10:	28 2f       	mov	r18, r24
+  12:	30 e0       	ldi	r19, 0x00	; 0
+  14:	3b 83       	std	Y+3, r19	; 0x03
+  16:	2a 83       	std	Y+2, r18	; 0x02
+  18:	8a 81       	ldd	r24, Y+2	; 0x02
+  1a:	9b 81       	ldd	r25, Y+3	; 0x03
+  1c:	84 30       	cpi	r24, 0x04	; 4
+  1e:	91 05       	cpc	r25, r1
+  20:	01 f0       	breq	.+0      	; 0x22 <Led_u8TurnON+0x22>
+  22:	2a 81       	ldd	r18, Y+2	; 0x02
+  24:	3b 81       	ldd	r19, Y+3	; 0x03
+  26:	25 30       	cpi	r18, 0x05	; 5
+  28:	31 05       	cpc	r19, r1
+  2a:	04 f4       	brge	.+0      	; 0x2c <Led_u8TurnON+0x2c>
+  2c:	8a 81       	ldd	r24, Y+2	; 0x02
+  2e:	9b 81       	ldd	r25, Y+3	; 0x03
+  30:	82 30       	cpi	r24, 0x02	; 2
+  32:	91 05       	cpc	r25, r1
+  34:	01 f0       	breq	.+0      	; 0x36 <Led_u8TurnON+0x36>
+  36:	2a 81       	ldd	r18, Y+2	; 0x02
+  38:	3b 81       	ldd	r19, Y+3	; 0x03
+  3a:	23 30       	cpi	r18, 0x03	; 3
+  3c:	31 05       	cpc	r19, r1
+  3e:	04 f4       	brge	.+0      	; 0x40 <Led_u8TurnON+0x40>
+  40:	8a 81       	ldd	r24, Y+2	; 0x02
+  42:	9b 81       	ldd	r25, Y+3	; 0x03
+  44:	81 30       	cpi	r24, 0x01	; 1
+  46:	91 05       	cpc	r25, r1
+  48:	01 f0       	breq	.+0      	; 0x4a <Led_u8TurnON+0x4a>
+  4a:	00 c0       	rjmp	.+0      	; 0x4c <Led_u8TurnON+0x4c>
+  4c:	2a 81       	ldd	r18, Y+2	; 0x02
+  4e:	3b 81       	ldd	r19, Y+3	; 0x03
+  50:	26 30       	cpi	r18, 0x06	; 6
+  52:	31 05       	cpc	r19, r1
+  54:	01 f0       	breq	.+0      	; 0x56 <Led_u8TurnON+0x56>
+  56:	8a 81       	ldd	r24, Y+2	; 0x02
+  58:	9b 81       	ldd	r25, Y+3	; 0x03
+  5a:	86 30       	cpi	r24, 0x06	; 6
+  5c:	91 05       	cpc	r25, r1
+  5e:	04 f0       	brlt	.+0      	; 0x60 <Led_u8TurnON+0x60>
+  60:	2a 81       	ldd	r18, Y+2	; 0x02
+  62:	3b 81       	ldd	r19, Y+3	; 0x03
+  64:	27 30       	cpi	r18, 0x07	; 7
+  66:	31 05       	cpc	r19, r1
+  68:	01 f0       	breq	.+0      	; 0x6a <Led_u8TurnON+0x6a>
+  6a:	8a 81       	ldd	r24, Y+2	; 0x02
+  6c:	9b 81       	ldd	r25, Y+3	; 0x03
+  6e:	88 30       	cpi	r24, 0x08	; 8
+  70:	91 05       	cpc	r25, r1
+  72:	01 f0       	breq	.+0      	; 0x74 <Led_u8TurnON+0x74>
+  74:	00 c0       	rjmp	.+0      	; 0x76 <Led_u8TurnON+0x76>
+	case 1:
+		Dio_vidSetPinDir(LED_u8ID_1,DIO_u8HIGH);	//Setting 1st 2 pins
+  76:	80 e0       	ldi	r24, 0x00	; 0
+  78:	61 e0       	ldi	r22, 0x01	; 1
+  7a:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnON>
+  7e:	00 c0       	rjmp	.+0      	; 0x80 <Led_u8TurnON+0x80>
+		break;
+	case 2:
+		Dio_vidSetPinDir(LED_u8ID_2,DIO_u8HIGH);	//of PORTA to output
+  80:	81 e0       	ldi	r24, 0x01	; 1
+  82:	61 e0       	ldi	r22, 0x01	; 1
+  84:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnON>
+  88:	00 c0       	rjmp	.+0      	; 0x8a <Led_u8TurnON+0x8a>
+		break;
+	case 3:
+		Dio_vidSetPinDir(LED_u8ID_3,DIO_u8HIGH);	//Setting 2nd 2 pins
+  8a:	8a e0       	ldi	r24, 0x0A	; 10
+  8c:	61 e0       	ldi	r22, 0x01	; 1
+  8e:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnON>
+  92:	00 c0       	rjmp	.+0      	; 0x94 <Led_u8TurnON+0x94>
+		break;
+	case 4:
+		Dio_vidSetPinDir(LED_u8ID_4,DIO_u8HIGH);	//of PORTB to output
+  94:	8b e0       	ldi	r24, 0x0B	; 11
+  96:	61 e0       	ldi	r22, 0x01	; 1
+  98:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnON>
+  9c:	00 c0       	rjmp	.+0      	; 0x9e <Led_u8TurnON+0x9e>
+		break;
+	case 5:
+		Dio_vidSetPinDir(LED_u8ID_5,DIO_u8HIGH);	//Setting 3rd 2 pins
+  9e:	84 e1       	ldi	r24, 0x14	; 20
+  a0:	61 e0       	ldi	r22, 0x01	; 1
+  a2:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnON>
+  a6:	00 c0       	rjmp	.+0      	; 0xa8 <Led_u8TurnON+0xa8>
+		break;
+	case 6:
+		Dio_vidSetPinDir(LED_u8ID_6,DIO_u8HIGH);	//of PORTC to output
+  a8:	85 e1       	ldi	r24, 0x15	; 21
+  aa:	61 e0       	ldi	r22, 0x01	; 1
+  ac:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnON>
+  b0:	00 c0       	rjmp	.+0      	; 0xb2 <Led_u8TurnON+0xb2>
+		break;
+	case 7:
+		Dio_vidSetPinDir(LED_u8ID_7,DIO_u8HIGH);	//Setting 4th 2 pins
+  b2:	8e e1       	ldi	r24, 0x1E	; 30
+  b4:	61 e0       	ldi	r22, 0x01	; 1
+  b6:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnON>
+  ba:	00 c0       	rjmp	.+0      	; 0xbc <Led_u8TurnON+0xbc>
+		break;
+	case 8:
+		Dio_vidSetPinDir(LED_u8ID_8,DIO_u8HIGH);	//of PORTD to output
+  bc:	8f e1       	ldi	r24, 0x1F	; 31
+  be:	61 e0       	ldi	r22, 0x01	; 1
+  c0:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnON>
+		break;
+	}
+}
+  c4:	0f 90       	pop	r0
+  c6:	0f 90       	pop	r0
+  c8:	0f 90       	pop	r0
+  ca:	cf 91       	pop	r28
+  cc:	df 91       	pop	r29
+  ce:	08 95       	ret
+
+Disassembly of section .text.Led_u8TurnOFF:
+
+00000000 <Led_u8TurnOFF>:
+#include"Dio_int.h"
+#include"LED_cfg.h"
+#include<avr/io.h>
+#include "LED_int.h"
+
+void Led_vidInit(u8 LedID){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	00 d0       	rcall	.+0      	; 0x6 <Led_u8TurnOFF+0x6>
+   6:	0f 92       	push	r0
+   8:	cd b7       	in	r28, 0x3d	; 61
+   a:	de b7       	in	r29, 0x3e	; 62
+   c:	89 83       	std	Y+1, r24	; 0x01
+	switch(LedID){
+   e:	89 81       	ldd	r24, Y+1	; 0x01
+  10:	28 2f       	mov	r18, r24
+  12:	30 e0       	ldi	r19, 0x00	; 0
+  14:	3b 83       	std	Y+3, r19	; 0x03
+  16:	2a 83       	std	Y+2, r18	; 0x02
+  18:	8a 81       	ldd	r24, Y+2	; 0x02
+  1a:	9b 81       	ldd	r25, Y+3	; 0x03
+  1c:	84 30       	cpi	r24, 0x04	; 4
+  1e:	91 05       	cpc	r25, r1
+  20:	01 f0       	breq	.+0      	; 0x22 <Led_u8TurnOFF+0x22>
+  22:	2a 81       	ldd	r18, Y+2	; 0x02
+  24:	3b 81       	ldd	r19, Y+3	; 0x03
+  26:	25 30       	cpi	r18, 0x05	; 5
+  28:	31 05       	cpc	r19, r1
+  2a:	04 f4       	brge	.+0      	; 0x2c <Led_u8TurnOFF+0x2c>
+  2c:	8a 81       	ldd	r24, Y+2	; 0x02
+  2e:	9b 81       	ldd	r25, Y+3	; 0x03
+  30:	82 30       	cpi	r24, 0x02	; 2
+  32:	91 05       	cpc	r25, r1
+  34:	01 f0       	breq	.+0      	; 0x36 <Led_u8TurnOFF+0x36>
+  36:	2a 81       	ldd	r18, Y+2	; 0x02
+  38:	3b 81       	ldd	r19, Y+3	; 0x03
+  3a:	23 30       	cpi	r18, 0x03	; 3
+  3c:	31 05       	cpc	r19, r1
+  3e:	04 f4       	brge	.+0      	; 0x40 <Led_u8TurnOFF+0x40>
+  40:	8a 81       	ldd	r24, Y+2	; 0x02
+  42:	9b 81       	ldd	r25, Y+3	; 0x03
+  44:	81 30       	cpi	r24, 0x01	; 1
+  46:	91 05       	cpc	r25, r1
+  48:	01 f0       	breq	.+0      	; 0x4a <Led_u8TurnOFF+0x4a>
+  4a:	00 c0       	rjmp	.+0      	; 0x4c <Led_u8TurnOFF+0x4c>
+  4c:	2a 81       	ldd	r18, Y+2	; 0x02
+  4e:	3b 81       	ldd	r19, Y+3	; 0x03
+  50:	26 30       	cpi	r18, 0x06	; 6
+  52:	31 05       	cpc	r19, r1
+  54:	01 f0       	breq	.+0      	; 0x56 <Led_u8TurnOFF+0x56>
+  56:	8a 81       	ldd	r24, Y+2	; 0x02
+  58:	9b 81       	ldd	r25, Y+3	; 0x03
+  5a:	86 30       	cpi	r24, 0x06	; 6
+  5c:	91 05       	cpc	r25, r1
+  5e:	04 f0       	brlt	.+0      	; 0x60 <Led_u8TurnOFF+0x60>
+  60:	2a 81       	ldd	r18, Y+2	; 0x02
+  62:	3b 81       	ldd	r19, Y+3	; 0x03
+  64:	27 30       	cpi	r18, 0x07	; 7
+  66:	31 05       	cpc	r19, r1
+  68:	01 f0       	breq	.+0      	; 0x6a <Led_u8TurnOFF+0x6a>
+  6a:	8a 81       	ldd	r24, Y+2	; 0x02
+  6c:	9b 81       	ldd	r25, Y+3	; 0x03
+  6e:	88 30       	cpi	r24, 0x08	; 8
+  70:	91 05       	cpc	r25, r1
+  72:	01 f0       	breq	.+0      	; 0x74 <Led_u8TurnOFF+0x74>
+  74:	00 c0       	rjmp	.+0      	; 0x76 <Led_u8TurnOFF+0x76>
+	case 1:
+		Dio_vidSetPinDir(LED_u8ID_1,DIO_u8HIGH);	//Setting 1st 2 pins
+  76:	80 e0       	ldi	r24, 0x00	; 0
+  78:	60 e0       	ldi	r22, 0x00	; 0
+  7a:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnOFF>
+  7e:	00 c0       	rjmp	.+0      	; 0x80 <Led_u8TurnOFF+0x80>
+		break;
+	case 2:
+		Dio_vidSetPinDir(LED_u8ID_2,DIO_u8HIGH);	//of PORTA to output
+  80:	81 e0       	ldi	r24, 0x01	; 1
+  82:	60 e0       	ldi	r22, 0x00	; 0
+  84:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnOFF>
+  88:	00 c0       	rjmp	.+0      	; 0x8a <Led_u8TurnOFF+0x8a>
+		break;
+	case 3:
+		Dio_vidSetPinDir(LED_u8ID_3,DIO_u8HIGH);	//Setting 2nd 2 pins
+  8a:	8a e0       	ldi	r24, 0x0A	; 10
+  8c:	60 e0       	ldi	r22, 0x00	; 0
+  8e:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnOFF>
+  92:	00 c0       	rjmp	.+0      	; 0x94 <Led_u8TurnOFF+0x94>
+		break;
+	case 4:
+		Dio_vidSetPinDir(LED_u8ID_4,DIO_u8HIGH);	//of PORTB to output
+  94:	8b e0       	ldi	r24, 0x0B	; 11
+  96:	60 e0       	ldi	r22, 0x00	; 0
+  98:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnOFF>
+  9c:	00 c0       	rjmp	.+0      	; 0x9e <Led_u8TurnOFF+0x9e>
+		break;
+	case 5:
+		Dio_vidSetPinDir(LED_u8ID_5,DIO_u8HIGH);	//Setting 3rd 2 pins
+  9e:	84 e1       	ldi	r24, 0x14	; 20
+  a0:	60 e0       	ldi	r22, 0x00	; 0
+  a2:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnOFF>
+  a6:	00 c0       	rjmp	.+0      	; 0xa8 <Led_u8TurnOFF+0xa8>
+		break;
+	case 6:
+		Dio_vidSetPinDir(LED_u8ID_6,DIO_u8HIGH);	//of PORTC to output
+  a8:	85 e1       	ldi	r24, 0x15	; 21
+  aa:	60 e0       	ldi	r22, 0x00	; 0
+  ac:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnOFF>
+  b0:	00 c0       	rjmp	.+0      	; 0xb2 <Led_u8TurnOFF+0xb2>
+		break;
+	case 7:
+		Dio_vidSetPinDir(LED_u8ID_7,DIO_u8HIGH);	//Setting 4th 2 pins
+  b2:	8e e1       	ldi	r24, 0x1E	; 30
+  b4:	60 e0       	ldi	r22, 0x00	; 0
+  b6:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnOFF>
+  ba:	00 c0       	rjmp	.+0      	; 0xbc <Led_u8TurnOFF+0xbc>
+		break;
+	case 8:
+		Dio_vidSetPinDir(LED_u8ID_8,DIO_u8HIGH);	//of PORTD to output
+  bc:	8f e1       	ldi	r24, 0x1F	; 31
+  be:	60 e0       	ldi	r22, 0x00	; 0
+  c0:	0e 94 00 00 	call	0	; 0x0 <Led_u8TurnOFF>
+		break;
+	}
+}
+  c4:	0f 90       	pop	r0
+  c6:	0f 90       	pop	r0
+  c8:	0f 90       	pop	r0
+  ca:	cf 91       	pop	r28
+  cc:	df 91       	pop	r29
+  ce:	08 95       	ret
+
+main.o:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000034  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000034  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  00000034  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  4 .stabstr      0000098d  00000000  00000000  00000700  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .bss.Ovf_counts 00000002  00000000  00000000  0000108d  2**0
+                  ALLOC
+  6 .text.main    00000072  00000000  00000000  0000108d  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  7 .bss.flag.1266 00000001  00000000  00000000  000010ff  2**0
+                  ALLOC
+  8 .text.App1_Code 00000030  00000000  00000000  000010ff  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  9 .bss.flag.1275 00000001  00000000  00000000  0000112f  2**0
+                  ALLOC
+ 10 .text.App2_Code 00000030  00000000  00000000  0000112f  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 11 .text.Scheduler 000000ba  00000000  00000000  0000115f  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 12 .text.Timer_vidInit 0000004e  00000000  00000000  00001219  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+ 13 .text.__vector_11 00000084  00000000  00000000  00001267  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+
+Disassembly of section .text.main:
+
+00000000 <main>:
+TaskType* TaskArray[2];
+void App1_Code(void);
+void App2_Code(void);
+void Scheduler(void);
+void Timer_vidInit(void);
+int main(void){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	cd b7       	in	r28, 0x3d	; 61
+   6:	de b7       	in	r29, 0x3e	; 62
+	App1.u32Periodicity =500;
+   8:	84 ef       	ldi	r24, 0xF4	; 244
+   a:	91 e0       	ldi	r25, 0x01	; 1
+   c:	90 93 00 00 	sts	0x0000, r25
+  10:	80 93 00 00 	sts	0x0000, r24
+	App1.u32FirstDelay  =0;
+  14:	10 92 00 00 	sts	0x0000, r1
+  18:	10 92 00 00 	sts	0x0000, r1
+	App1.pfTaskCode 	=App1_Code;
+  1c:	80 e0       	ldi	r24, 0x00	; 0
+  1e:	90 e0       	ldi	r25, 0x00	; 0
+  20:	90 93 00 00 	sts	0x0000, r25
+  24:	80 93 00 00 	sts	0x0000, r24
+
+
+	App2.u32Periodicity =1000;
+  28:	88 ee       	ldi	r24, 0xE8	; 232
+  2a:	93 e0       	ldi	r25, 0x03	; 3
+  2c:	90 93 00 00 	sts	0x0000, r25
+  30:	80 93 00 00 	sts	0x0000, r24
+	App2.u32FirstDelay  =0;
+  34:	10 92 00 00 	sts	0x0000, r1
+  38:	10 92 00 00 	sts	0x0000, r1
+	App2.pfTaskCode  	=App2_Code;
+  3c:	80 e0       	ldi	r24, 0x00	; 0
+  3e:	90 e0       	ldi	r25, 0x00	; 0
+  40:	90 93 00 00 	sts	0x0000, r25
+  44:	80 93 00 00 	sts	0x0000, r24
+
+
+
+	TaskArray[0] = &App1;
+  48:	80 e0       	ldi	r24, 0x00	; 0
+  4a:	90 e0       	ldi	r25, 0x00	; 0
+  4c:	90 93 00 00 	sts	0x0000, r25
+  50:	80 93 00 00 	sts	0x0000, r24
+	TaskArray[1] = &App2;
+  54:	80 e0       	ldi	r24, 0x00	; 0
+  56:	90 e0       	ldi	r25, 0x00	; 0
+  58:	90 93 00 00 	sts	0x0000, r25
+  5c:	80 93 00 00 	sts	0x0000, r24
+	Led_vidInit(Led_1);
+  60:	81 e0       	ldi	r24, 0x01	; 1
+  62:	0e 94 00 00 	call	0	; 0x0 <main>
+	Led_vidInit(Led_2);
+  66:	82 e0       	ldi	r24, 0x02	; 2
+  68:	0e 94 00 00 	call	0	; 0x0 <main>
+
+	Timer_vidInit();
+  6c:	0e 94 00 00 	call	0	; 0x0 <main>
+  70:	00 c0       	rjmp	.+0      	; 0x72 <__SREG__+0x33>
+
+Disassembly of section .text.App1_Code:
+
+00000000 <App1_Code>:
+TaskType* TaskArray[2];
+void App1_Code(void);
+void App2_Code(void);
+void Scheduler(void);
+void Timer_vidInit(void);
+int main(void){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	cd b7       	in	r28, 0x3d	; 61
+   6:	de b7       	in	r29, 0x3e	; 62
+	App1.u32Periodicity =500;
+   8:	80 91 00 00 	lds	r24, 0x0000
+   c:	88 23       	and	r24, r24
+   e:	01 f4       	brne	.+0      	; 0x10 <App1_Code+0x10>
+  10:	81 e0       	ldi	r24, 0x01	; 1
+  12:	0e 94 00 00 	call	0	; 0x0 <App1_Code>
+	App1.u32FirstDelay  =0;
+  16:	81 e0       	ldi	r24, 0x01	; 1
+  18:	80 93 00 00 	sts	0x0000, r24
+	App1.pfTaskCode 	=App1_Code;
+  1c:	00 c0       	rjmp	.+0      	; 0x1e <App1_Code+0x1e>
+  1e:	81 e0       	ldi	r24, 0x01	; 1
+  20:	90 e0       	ldi	r25, 0x00	; 0
+  22:	0e 94 00 00 	call	0	; 0x0 <App1_Code>
+  26:	10 92 00 00 	sts	0x0000, r1
+
+
+	App2.u32Periodicity =1000;
+  2a:	cf 91       	pop	r28
+  2c:	df 91       	pop	r29
+  2e:	08 95       	ret
+
+Disassembly of section .text.App2_Code:
+
+00000000 <App2_Code>:
+TaskType* TaskArray[2];
+void App1_Code(void);
+void App2_Code(void);
+void Scheduler(void);
+void Timer_vidInit(void);
+int main(void){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	cd b7       	in	r28, 0x3d	; 61
+   6:	de b7       	in	r29, 0x3e	; 62
+	App1.u32Periodicity =500;
+   8:	80 91 00 00 	lds	r24, 0x0000
+   c:	88 23       	and	r24, r24
+   e:	01 f4       	brne	.+0      	; 0x10 <App2_Code+0x10>
+  10:	82 e0       	ldi	r24, 0x02	; 2
+  12:	0e 94 00 00 	call	0	; 0x0 <App2_Code>
+	App1.u32FirstDelay  =0;
+  16:	81 e0       	ldi	r24, 0x01	; 1
+  18:	80 93 00 00 	sts	0x0000, r24
+	App1.pfTaskCode 	=App1_Code;
+  1c:	00 c0       	rjmp	.+0      	; 0x1e <App2_Code+0x1e>
+  1e:	82 e0       	ldi	r24, 0x02	; 2
+  20:	90 e0       	ldi	r25, 0x00	; 0
+  22:	0e 94 00 00 	call	0	; 0x0 <App2_Code>
+  26:	10 92 00 00 	sts	0x0000, r1
+
+
+	App2.u32Periodicity =1000;
+  2a:	cf 91       	pop	r28
+  2c:	df 91       	pop	r29
+  2e:	08 95       	ret
+
+Disassembly of section .text.Scheduler:
+
+00000000 <Scheduler>:
+TaskType* TaskArray[2];
+void App1_Code(void);
+void App2_Code(void);
+void Scheduler(void);
+void Timer_vidInit(void);
+int main(void){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	0f 92       	push	r0
+   6:	cd b7       	in	r28, 0x3d	; 61
+	App1.u32Periodicity =500;
+   8:	de b7       	in	r29, 0x3e	; 62
+   a:	19 82       	std	Y+1, r1	; 0x01
+   c:	00 c0       	rjmp	.+0      	; 0xe <Scheduler+0xe>
+   e:	89 81       	ldd	r24, Y+1	; 0x01
+  10:	88 2f       	mov	r24, r24
+  12:	90 e0       	ldi	r25, 0x00	; 0
+	App1.u32FirstDelay  =0;
+  14:	88 0f       	add	r24, r24
+  16:	99 1f       	adc	r25, r25
+  18:	fc 01       	movw	r30, r24
+  1a:	e0 50       	subi	r30, 0x00	; 0
+	App1.pfTaskCode 	=App1_Code;
+  1c:	f0 40       	sbci	r31, 0x00	; 0
+  1e:	01 90       	ld	r0, Z+
+  20:	f0 81       	ld	r31, Z
+  22:	e0 2d       	mov	r30, r0
+  24:	82 81       	ldd	r24, Z+2	; 0x02
+  26:	93 81       	ldd	r25, Z+3	; 0x03
+
+
+	App2.u32Periodicity =1000;
+  28:	00 97       	sbiw	r24, 0x00	; 0
+  2a:	01 f4       	brne	.+0      	; 0x2c <Scheduler+0x2c>
+  2c:	89 81       	ldd	r24, Y+1	; 0x01
+  2e:	88 2f       	mov	r24, r24
+  30:	90 e0       	ldi	r25, 0x00	; 0
+  32:	88 0f       	add	r24, r24
+	App2.u32FirstDelay  =0;
+  34:	99 1f       	adc	r25, r25
+  36:	fc 01       	movw	r30, r24
+  38:	e0 50       	subi	r30, 0x00	; 0
+  3a:	f0 40       	sbci	r31, 0x00	; 0
+	App2.pfTaskCode  	=App2_Code;
+  3c:	01 90       	ld	r0, Z+
+  3e:	f0 81       	ld	r31, Z
+  40:	e0 2d       	mov	r30, r0
+  42:	04 80       	ldd	r0, Z+4	; 0x04
+  44:	f5 81       	ldd	r31, Z+5	; 0x05
+  46:	e0 2d       	mov	r30, r0
+
+
+
+	TaskArray[0] = &App1;
+  48:	09 95       	icall
+  4a:	89 81       	ldd	r24, Y+1	; 0x01
+  4c:	88 2f       	mov	r24, r24
+  4e:	90 e0       	ldi	r25, 0x00	; 0
+  50:	88 0f       	add	r24, r24
+  52:	99 1f       	adc	r25, r25
+	TaskArray[1] = &App2;
+  54:	fc 01       	movw	r30, r24
+  56:	e0 50       	subi	r30, 0x00	; 0
+  58:	f0 40       	sbci	r31, 0x00	; 0
+  5a:	a0 81       	ld	r26, Z
+  5c:	b1 81       	ldd	r27, Z+1	; 0x01
+  5e:	89 81       	ldd	r24, Y+1	; 0x01
+	Led_vidInit(Led_1);
+  60:	88 2f       	mov	r24, r24
+  62:	90 e0       	ldi	r25, 0x00	; 0
+  64:	88 0f       	add	r24, r24
+	Led_vidInit(Led_2);
+  66:	99 1f       	adc	r25, r25
+  68:	fc 01       	movw	r30, r24
+  6a:	e0 50       	subi	r30, 0x00	; 0
+
+	Timer_vidInit();
+  6c:	f0 40       	sbci	r31, 0x00	; 0
+  6e:	01 90       	ld	r0, Z+
+  70:	f0 81       	ld	r31, Z
+  72:	e0 2d       	mov	r30, r0
+  74:	80 81       	ld	r24, Z
+  76:	91 81       	ldd	r25, Z+1	; 0x01
+  78:	01 97       	sbiw	r24, 0x01	; 1
+  7a:	13 96       	adiw	r26, 0x03	; 3
+  7c:	9c 93       	st	X, r25
+  7e:	8e 93       	st	-X, r24
+  80:	12 97       	sbiw	r26, 0x02	; 2
+  82:	00 c0       	rjmp	.+0      	; 0x84 <Scheduler+0x84>
+  84:	89 81       	ldd	r24, Y+1	; 0x01
+  86:	88 2f       	mov	r24, r24
+  88:	90 e0       	ldi	r25, 0x00	; 0
+  8a:	88 0f       	add	r24, r24
+  8c:	99 1f       	adc	r25, r25
+  8e:	fc 01       	movw	r30, r24
+  90:	e0 50       	subi	r30, 0x00	; 0
+  92:	f0 40       	sbci	r31, 0x00	; 0
+  94:	01 90       	ld	r0, Z+
+  96:	f0 81       	ld	r31, Z
+  98:	e0 2d       	mov	r30, r0
+  9a:	82 81       	ldd	r24, Z+2	; 0x02
+  9c:	93 81       	ldd	r25, Z+3	; 0x03
+  9e:	01 97       	sbiw	r24, 0x01	; 1
+  a0:	93 83       	std	Z+3, r25	; 0x03
+  a2:	82 83       	std	Z+2, r24	; 0x02
+  a4:	89 81       	ldd	r24, Y+1	; 0x01
+  a6:	8f 5f       	subi	r24, 0xFF	; 255
+  a8:	89 83       	std	Y+1, r24	; 0x01
+  aa:	89 81       	ldd	r24, Y+1	; 0x01
+  ac:	82 30       	cpi	r24, 0x02	; 2
+  ae:	00 f4       	brcc	.+0      	; 0xb0 <Scheduler+0xb0>
+  b0:	00 c0       	rjmp	.+0      	; 0xb2 <Scheduler+0xb2>
+  b2:	0f 90       	pop	r0
+  b4:	cf 91       	pop	r28
+  b6:	df 91       	pop	r29
+  b8:	08 95       	ret
+
+Disassembly of section .text.Timer_vidInit:
+
+00000000 <Timer_vidInit>:
+TaskType* TaskArray[2];
+void App1_Code(void);
+void App2_Code(void);
+void Scheduler(void);
+void Timer_vidInit(void);
+int main(void){
+   0:	df 93       	push	r29
+   2:	cf 93       	push	r28
+   4:	cd b7       	in	r28, 0x3d	; 61
+   6:	de b7       	in	r29, 0x3e	; 62
+	App1.u32Periodicity =500;
+   8:	10 92 00 00 	sts	0x0000, r1
+   c:	10 92 00 00 	sts	0x0000, r1
+  10:	e3 e5       	ldi	r30, 0x53	; 83
+  12:	f0 e0       	ldi	r31, 0x00	; 0
+	App1.u32FirstDelay  =0;
+  14:	10 82       	st	Z, r1
+  16:	a3 e5       	ldi	r26, 0x53	; 83
+  18:	b0 e0       	ldi	r27, 0x00	; 0
+  1a:	e3 e5       	ldi	r30, 0x53	; 83
+	App1.pfTaskCode 	=App1_Code;
+  1c:	f0 e0       	ldi	r31, 0x00	; 0
+  1e:	80 81       	ld	r24, Z
+  20:	81 60       	ori	r24, 0x01	; 1
+  22:	8c 93       	st	X, r24
+  24:	e2 e5       	ldi	r30, 0x52	; 82
+  26:	f0 e0       	ldi	r31, 0x00	; 0
+
+
+	App2.u32Periodicity =1000;
+  28:	80 ec       	ldi	r24, 0xC0	; 192
+  2a:	80 83       	st	Z, r24
+  2c:	a9 e5       	ldi	r26, 0x59	; 89
+  2e:	b0 e0       	ldi	r27, 0x00	; 0
+  30:	e9 e5       	ldi	r30, 0x59	; 89
+  32:	f0 e0       	ldi	r31, 0x00	; 0
+	App2.u32FirstDelay  =0;
+  34:	80 81       	ld	r24, Z
+  36:	81 60       	ori	r24, 0x01	; 1
+  38:	8c 93       	st	X, r24
+  3a:	af e5       	ldi	r26, 0x5F	; 95
+	App2.pfTaskCode  	=App2_Code;
+  3c:	b0 e0       	ldi	r27, 0x00	; 0
+  3e:	ef e5       	ldi	r30, 0x5F	; 95
+  40:	f0 e0       	ldi	r31, 0x00	; 0
+  42:	80 81       	ld	r24, Z
+  44:	80 68       	ori	r24, 0x80	; 128
+  46:	8c 93       	st	X, r24
+
+
+
+	TaskArray[0] = &App1;
+  48:	cf 91       	pop	r28
+  4a:	df 91       	pop	r29
+  4c:	08 95       	ret
+
+Disassembly of section .text.__vector_11:
+
+00000000 <__vector_11>:
+TaskType* TaskArray[2];
+void App1_Code(void);
+void App2_Code(void);
+void Scheduler(void);
+void Timer_vidInit(void);
+int main(void){
+   0:	1f 92       	push	r1
+   2:	0f 92       	push	r0
+   4:	0f b6       	in	r0, 0x3f	; 63
+   6:	0f 92       	push	r0
+	App1.u32Periodicity =500;
+   8:	11 24       	eor	r1, r1
+   a:	2f 93       	push	r18
+   c:	3f 93       	push	r19
+   e:	4f 93       	push	r20
+  10:	5f 93       	push	r21
+  12:	6f 93       	push	r22
+	App1.u32FirstDelay  =0;
+  14:	7f 93       	push	r23
+  16:	8f 93       	push	r24
+  18:	9f 93       	push	r25
+  1a:	af 93       	push	r26
+	App1.pfTaskCode 	=App1_Code;
+  1c:	bf 93       	push	r27
+  1e:	ef 93       	push	r30
+  20:	ff 93       	push	r31
+  22:	df 93       	push	r29
+  24:	cf 93       	push	r28
+  26:	cd b7       	in	r28, 0x3d	; 61
+
+
+	App2.u32Periodicity =1000;
+  28:	de b7       	in	r29, 0x3e	; 62
+  2a:	80 91 00 00 	lds	r24, 0x0000
+  2e:	90 91 00 00 	lds	r25, 0x0000
+  32:	01 96       	adiw	r24, 0x01	; 1
+	App2.u32FirstDelay  =0;
+  34:	90 93 00 00 	sts	0x0000, r25
+  38:	80 93 00 00 	sts	0x0000, r24
+	App2.pfTaskCode  	=App2_Code;
+  3c:	80 91 00 00 	lds	r24, 0x0000
+  40:	90 91 00 00 	lds	r25, 0x0000
+  44:	80 32       	cpi	r24, 0x20	; 32
+  46:	91 05       	cpc	r25, r1
+
+
+
+	TaskArray[0] = &App1;
+  48:	01 f4       	brne	.+0      	; 0x4a <__vector_11+0x4a>
+  4a:	10 92 00 00 	sts	0x0000, r1
+  4e:	10 92 00 00 	sts	0x0000, r1
+  52:	e2 e5       	ldi	r30, 0x52	; 82
+	TaskArray[1] = &App2;
+  54:	f0 e0       	ldi	r31, 0x00	; 0
+  56:	80 ec       	ldi	r24, 0xC0	; 192
+  58:	80 83       	st	Z, r24
+  5a:	0e 94 00 00 	call	0	; 0x0 <__vector_11>
+  5e:	cf 91       	pop	r28
+	Led_vidInit(Led_1);
+  60:	df 91       	pop	r29
+  62:	ff 91       	pop	r31
+  64:	ef 91       	pop	r30
+	Led_vidInit(Led_2);
+  66:	bf 91       	pop	r27
+  68:	af 91       	pop	r26
+  6a:	9f 91       	pop	r25
+
+	Timer_vidInit();
+  6c:	8f 91       	pop	r24
+  6e:	7f 91       	pop	r23
+  70:	6f 91       	pop	r22
+  72:	5f 91       	pop	r21
+  74:	4f 91       	pop	r20
+  76:	3f 91       	pop	r19
+  78:	2f 91       	pop	r18
+  7a:	0f 90       	pop	r0
+  7c:	0f be       	out	0x3f, r0	; 63
+  7e:	0f 90       	pop	r0
+  80:	1f 90       	pop	r1
+  82:	18 95       	reti
