@@ -1,0 +1,15 @@
+seven segment:
+com-5v
+g-7a
+f-6a
+e-5a
+d-4a
+c-3a
+b-2a
+a-1a
+
+leds: 
+led1-1c
+led2-2c
+led3-3c
+ledGND-GND
